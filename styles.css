@@ -1,19 +1,27 @@
-
+/* =========================================================
+   1) CSS Variables (Theme / Colors)
+   ========================================================= */
 
 :root {
-  --bg: #0f172a;
-  --card: #111827;
+  --bg: #101112;
+  --surface: #17191c;
+  --surface-strong: #1f2227;
+  --card: #191b20;
 
   --text: #ffffff;
-  --muted: #9ca3af;
+  --muted: #a7adb7;
 
-  --purple: #7c3aed;
-  --blue: #2563eb;
-  --glow: #a78bfa;
+  --accent: #20c7b3;
+  --accent-warm: #f1a64f;
+  --accent-soft: #d9f7f2;
 
-  --nav-bg: #1e1633;
-  --border-dark: #ffffff;
+  --nav-bg: rgba(18, 19, 21, 0.94);
+  --border: rgba(255, 255, 255, 0.12);
 }
+
+/* =========================================================
+   2) Global Reset / Base Setup
+   ========================================================= */
 
 * {
   box-sizing: border-box;
@@ -24,19 +32,25 @@ body {
   height: 100%;
 }
 
+/* =========================================================
+   3) Body / Page Background
+   ========================================================= */
+
 body {
   margin: 0;
   color: var(--text);
-  background:
-    radial-gradient(circle at 20% 30%, rgba(124, 58, 237, 0.20), transparent 40%),
-    radial-gradient(circle at 80% 70%, rgba(37, 99, 235, 0.20), transparent 40%),
-    var(--bg);
+  background: linear-gradient(180deg, #101112 0%, #141517 48%, #0f1011 100%);
 }
 
+/* Page wrapper to ensure full height layout */
 .page {
   min-height: 100vh;
 }
 
+/* =========================================================
+   4) Layout Container Widths
+   - Centers header + main content to 1110px
+   ========================================================= */
 
 .site-header,
 .main {
@@ -44,50 +58,45 @@ body {
   margin: 0 auto;
 }
 
+/* =========================================================
+   5) Header Area
+   ========================================================= */
 
 .site-header {
   position: relative;
   padding-top: 24px;
 }
 
-
-.site-header::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 90%;
-  height: 120px;
-  background: radial-gradient(
-    ellipse at center,
-    rgba(124, 58, 237, 0.35),
-    rgba(37, 99, 235, 0.15),
-    transparent 70%
-  );
-  filter: blur(40px);
-  z-index: -1;}
+/* =========================================================
+   6) Navigation Bar (Header)
+   ========================================================= */
 
 .navbar {
   width: 1110px;
-  min-height: 70px;      /* was height */
-  height: auto;          /* allows it to grow */
+  min-height: 70px;
+  height: auto;
   background: var(--nav-bg);
+  border: 1px solid var(--border);
+  border-top: 0;
   border-radius: 0 0 8px 8px;
 
   display: flex;
   align-items: center;
   justify-content: space-between;
-  flex-wrap: wrap;       /* allows wrapping inside */
+  flex-wrap: wrap;
 
-  padding: 16px 64px;    /* vertical padding added */
-  gap: 12px;             /* spacing when wrapping */
+  padding: 16px 64px;
+  gap: 12px;
 }
+
+/* =========================================================
+   7) Navigation Links
+   ========================================================= */
 
 .nav-links {
   list-style: none;
   display: flex;
-  gap: 70px;
+  gap: 34px;
   margin: 0;
   padding: 0;
 }
@@ -96,8 +105,8 @@ body {
   font-family: "IBM Plex Mono", monospace;
   font-size: 14px;
   font-weight: 400;
-  letter-spacing: 0.01em;
-  color: #9c9c9c;
+  letter-spacing: 0;
+  color: var(--muted);
   text-decoration: none;
   transition: color 180ms ease;
 }
@@ -106,13 +115,17 @@ body {
   color: #ffffff;
 }
 
+/* =========================================================
+   8) Social Icons
+   ========================================================= */
+
 .social-icons {
   display: flex;
   gap: 25px;
 }
 
 .social-icons a {
-  color: #9c9c9c;
+  color: var(--muted);
   text-decoration: none;
   transition: color 180ms ease, transform 180ms ease;
 }
@@ -122,10 +135,17 @@ body {
   transform: translateY(-1px);
 }
 
+/* =========================================================
+   9) Main Spacing
+   ========================================================= */
 
 .main {
   padding-top: 80px;
 }
+
+/* =========================================================
+   10) Hero Section Layout
+   ========================================================= */
 
 .hero {
   display: flex;
@@ -139,6 +159,7 @@ body {
   flex-direction: column;
 }
 
+/* Hero Title */
 .hero-title {
   font-family: "Raleway", sans-serif;
   font-size: 44px;
@@ -146,20 +167,24 @@ body {
   line-height: 1;
   letter-spacing: 0;
   color: #ffffff;
-  margin: 0 0 10px 0; 
+  margin: 0 0 10px 0;
 }
 
+/* Hero Body Text */
 .hero-text {
   width: 492px;
   font-family: "IBM Plex Mono", monospace;
   font-size: 14px;
   font-weight: 400;
   line-height: 24px;
-  letter-spacing: 0.01em;
-  color: #9c9c9c;
-  margin: 0 0 30px 0; 
+  letter-spacing: 0;
+  color: var(--muted);
+  margin: 0 0 30px 0;
 }
 
+/* =========================================================
+   11) Call-To-Action Button (CTA)
+   ========================================================= */
 
 .cta {
   display: inline-flex;
@@ -173,21 +198,20 @@ body {
   font-family: "IBM Plex Mono", monospace;
   font-size: 14px;
   font-weight: 400;
-  letter-spacing: 0.01em;
-  color: #ffffff;
+  letter-spacing: 0;
+  color: #111315;
   text-decoration: none;
 
-  border: 1px solid rgba(167, 139, 250, 0.45);
-  background: linear-gradient(135deg, var(--purple), var(--blue));
+  border: 1px solid rgba(32, 199, 179, 0.55);
+  background: linear-gradient(135deg, var(--accent), var(--accent-warm));
 
- 
-  box-shadow: 0 8px 30px rgba(124, 58, 237, 0.35);
+  box-shadow: 0 10px 28px rgba(32, 199, 179, 0.18);
   transition: transform 180ms ease, box-shadow 180ms ease, filter 180ms ease;
 }
 
 .cta:hover {
   transform: translateY(-1px);
-  box-shadow: 0 10px 34px rgba(37, 99, 235, 0.38), 0 0 18px rgba(167, 139, 250, 0.25);
+  box-shadow: 0 14px 36px rgba(241, 166, 79, 0.18);
   filter: saturate(1.05);
 }
 
@@ -196,6 +220,9 @@ body {
   line-height: 1;
 }
 
+/* =========================================================
+   12) Hero Image
+   ========================================================= */
 
 .hero-right {
   width: 350px;
@@ -210,61 +237,311 @@ body {
   display: block;
 }
 
+/* =========================================================
+   13) Shared Section Elements
+   ========================================================= */
 
-.clients {
-  margin-top: 60px;
+.capabilities,
+.case-studies,
+.project-range,
+.process,
+.contact-section {
+  margin-top: 90px;
 }
 
-.clients-label {
+.contact-section {
+  padding-bottom: 80px;
+}
+
+.section-heading {
+  margin-bottom: 24px;
+}
+
+.section-kicker,
+.project-type {
   font-family: "IBM Plex Mono", monospace;
-  font-size: 14px;
-  font-weight: 400;
+  font-size: 13px;
   line-height: 1;
   letter-spacing: 0;
+  color: var(--accent);
+  margin: 0 0 12px 0;
+  text-transform: uppercase;
+}
+
+.section-heading h2 {
+  font-family: "Raleway", sans-serif;
+  font-size: 38px;
+  line-height: 1;
   color: #ffffff;
-  margin: 0 0 10px 0; 
+  margin: 0;
 }
 
-.clients-row {
-  display: flex;
-  gap: 30px;
-  width: 920px;
+/* =========================================================
+   14) Capabilities
+   ========================================================= */
+
+.capability-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 18px;
 }
 
-.client-card {
-  width: 160px;
-  height: 60px;
-  border: 1px solid var(--border-dark);
-  display: flex;
+.capability-card,
+.range-card,
+.process-step {
+  border: 1px solid rgba(248, 248, 248, 0.13);
+  border-radius: 8px;
+  background: linear-gradient(135deg, var(--surface-strong), var(--card));
+  box-shadow: 0 18px 60px rgba(0, 0, 0, 0.2);
+}
+
+.capability-card {
+  min-height: 250px;
+  padding: 22px;
+}
+
+.capability-card i {
+  display: inline-flex;
+  width: 42px;
+  height: 42px;
   align-items: center;
   justify-content: center;
+  border-radius: 8px;
+  background: rgba(32, 199, 179, 0.12);
+  color: var(--accent-soft);
+  font-size: 18px;
 }
 
-.client-card img {
-  opacity: 0.3;
-  max-width: 120px;
-  height: auto;
+.capability-card h3,
+.range-card h3,
+.process-step span {
+  font-family: "Raleway", sans-serif;
+  color: #ffffff;
 }
 
+.capability-card h3 {
+  margin: 18px 0 10px;
+  font-size: 22px;
+  line-height: 1.05;
+}
+
+.capability-card p,
+.range-card p,
+.process-step p {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 13px;
+  line-height: 22px;
+  color: #c2c7cf;
+  margin: 0;
+}
+
+/* =========================================================
+   15) Case Studies / Project Cards
+   ========================================================= */
+
+.case-study-card {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(420px, 1.1fr);
+  gap: 30px;
+  align-items: stretch;
+  border: 1px solid rgba(248, 248, 248, 0.14);
+  border-radius: 8px;
+  padding: 24px;
+  background: linear-gradient(135deg, var(--surface-strong), var(--card));
+  box-shadow: 0 18px 70px rgba(0, 0, 0, 0.28);
+}
+
+.case-study-copy {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  justify-content: center;
+  padding: 8px;
+}
+
+.case-study-copy h3 {
+  font-family: "Raleway", sans-serif;
+  font-size: 34px;
+  line-height: 1;
+  color: #ffffff;
+  margin: 0 0 14px 0;
+}
+
+.case-study-copy p:not(.project-type) {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 14px;
+  line-height: 24px;
+  color: #c2c7cf;
+  margin: 0;
+}
+
+.project-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 22px;
+}
+
+.project-tags span {
+  border: 1px solid rgba(32, 199, 179, 0.24);
+  border-radius: 999px;
+  padding: 8px 10px;
+  background: rgba(32, 199, 179, 0.08);
+  color: var(--accent-soft);
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 12px;
+}
+
+.project-actions {
+  margin-top: 26px;
+}
+
+.project-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #ffffff;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 14px;
+  text-decoration: none;
+  transition: color 180ms ease, transform 180ms ease;
+}
+
+.project-link:hover {
+  color: var(--accent);
+  transform: translateX(2px);
+}
+
+.case-study-media {
+  display: block;
+  min-height: 340px;
+  overflow: hidden;
+  border-radius: 8px;
+  background: #111315;
+}
+
+.case-study-media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-height: 340px;
+  object-fit: cover;
+  transition: transform 500ms ease;
+}
+
+.case-study-media:hover img {
+  transform: scale(1.03);
+}
+
+/* =========================================================
+   16) Project Range / Process / Contact
+   ========================================================= */
+
+.range-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.range-card {
+  min-height: 220px;
+  padding: 22px;
+}
+
+.range-card span {
+  display: inline-flex;
+  margin-bottom: 28px;
+  font-family: "IBM Plex Mono", monospace;
+  color: var(--accent-warm);
+  font-size: 13px;
+}
+
+.range-card h3 {
+  margin: 0 0 10px;
+  font-size: 21px;
+  line-height: 1.08;
+}
+
+.process-list {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.process-step {
+  display: grid;
+  gap: 14px;
+  padding: 22px;
+}
+
+.process-step span {
+  font-size: 24px;
+}
+
+.contact-section {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 34px;
+  border-top: 1px solid rgba(248, 248, 248, 0.14);
+  padding-top: 58px;
+}
+
+.contact-section h2 {
+  max-width: 660px;
+  font-family: "Raleway", sans-serif;
+  font-size: 36px;
+  line-height: 1.05;
+  color: #ffffff;
+  margin: 0;
+}
+
+.contact-actions {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: 18px;
+}
+
+.contact-actions .cta {
+  padding-inline: 36px;
+}
+
+/* =========================================================
+   17) Responsive Styles
+   ========================================================= */
 
 @media (max-width: 1200px) {
   .site-header,
-  .main,
-  .navbar {
+  .main {
     width: calc(100% - 32px);
   }
 
   .navbar {
-    padding: 20 24px;
+    width: 100%;
+    padding: 20px 24px;
   }
 
-  .clients-row {
-    width: 100%;
-    flex-wrap: wrap;
+  .capability-grid,
+  .range-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .case-study-card {
+    grid-template-columns: 1fr;
+  }
+
+  .contact-section {
+    align-items: flex-start;
+    flex-direction: column;
   }
 }
 
 @media (max-width: 900px) {
+  .main {
+    padding-top: 56px;
+  }
+
   .hero {
     flex-direction: column;
     align-items: flex-start;
@@ -289,16 +566,52 @@ body {
   }
 
   .nav-links {
-    gap: 22px;
+    gap: 16px 22px;
     flex-wrap: wrap;
+  }
+
+  .nav-links a {
+    font-size: 13px;
+  }
+
+  .capabilities,
+  .case-studies,
+  .project-range,
+  .process,
+  .contact-section {
+    margin-top: 70px;
+  }
+
+  .capability-grid,
+  .range-grid,
+  .process-list {
+    grid-template-columns: 1fr;
+  }
+
+  .case-study-card {
+    padding: 18px;
+  }
+
+  .case-study-media,
+  .case-study-media img {
+    min-height: 260px;
+  }
+
+  .contact-actions {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .contact-section h2 {
+    font-size: 30px;
   }
 }
 
+/* =========================================================
+   18) Hero Image Position
+   ========================================================= */
+
 .hero-photo {
-  width: 350px;
-  height: 350px;
-  border-radius: 50%;
-  object-fit: cover;
   object-position: 50% 3%;
-  box-shadow: 0 0 40px rgba(124, 58, 237, 0.35);
+  box-shadow: 0 22px 60px rgba(0, 0, 0, 0.34);
 }
