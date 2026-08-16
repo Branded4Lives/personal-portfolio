@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LeadFlow CRM Demo</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;700&family=Inter:wght@500;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="../assets/demo.css" />
+  </head>
+
+  <body>
+    <div class="demo-shell">
+      <nav class="demo-nav">
+        <a class="demo-brand" href="../../">
+          <span class="brand-mark"><i class="fa-solid fa-chart-line"></i></span>
+          LeadFlow CRM
+        </a>
+        <div class="demo-nav-actions">
+          <a class="ghost-link" href="../../#project-demos">Back to portfolio</a>
+          <a class="primary-link" href="mailto:bmcgahuey@gmail.com">Request a build</a>
+        </div>
+      </nav>
+
+      <header class="demo-header">
+        <section class="hero-copy">
+          <p class="eyebrow">Sales pipeline console</p>
+          <h1>Lead tracking for teams that need faster follow-up.</h1>
+          <p>
+            A business CRM concept with intake triage, revenue stages, owner
+            accountability, and next-action visibility for every opportunity.
+          </p>
+        </section>
+
+        <aside class="signal-card">
+          <div>
+            <div class="signal-header">
+              <span>Pipeline health</span>
+              <span class="status-dot"></span>
+            </div>
+            <div class="signal-number">$48k</div>
+            <div class="signal-label">qualified revenue in motion</div>
+          </div>
+          <div class="signal-chart" aria-label="Pipeline activity chart">
+            <span style="height: 42%"></span>
+            <span style="height: 64%"></span>
+            <span style="height: 48%"></span>
+            <span style="height: 78%"></span>
+            <span style="height: 58%"></span>
+            <span style="height: 86%"></span>
+            <span style="height: 72%"></span>
+            <span style="height: 92%"></span>
+          </div>
+        </aside>
+      </header>
+
+      <section class="metric-grid" aria-label="CRM metrics">
+        <article class="metric-card">
+          <span>Open leads</span>
+          <strong id="lead-count">38</strong>
+          <small>12 need action today</small>
+        </article>
+        <article class="metric-card">
+          <span>Avg. response</span>
+          <strong>2.4h</strong>
+          <small>31% faster this week</small>
+        </article>
+        <article class="metric-card">
+          <span>Forecast close</span>
+          <strong>63%</strong>
+          <small>based on active stage</small>
+        </article>
+        <article class="metric-card">
+          <span>Booked consults</span>
+          <strong>14</strong>
+          <small>8 confirmed</small>
+        </article>
+      </section>
+
+      <main class="workspace">
+        <section class="panel">
+          <div class="panel-header">
+            <div>
+              <h2 class="panel-title">Opportunity queue</h2>
+              <p class="panel-subtitle">Filter leads by active business stage.</p>
+            </div>
+            <div class="segmented" aria-label="Lead filters">
+              <button class="active" data-filter="all">All</button>
+              <button data-filter="new">New</button>
+              <button data-filter="qualified">Qualified</button>
+              <button data-filter="proposal">Proposal</button>
+              <button data-filter="won">Won</button>
+            </div>
+          </div>
+
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Lead</th>
+                  <th>Need</th>
+                  <th>Budget</th>
+                  <th>Status</th>
+                  <th>Owner</th>
+                  <th>Next action</th>
+                </tr>
+              </thead>
+              <tbody id="lead-table">
+                <tr data-status="new">
+                  <td>Harbor Dental</td>
+                  <td>Patient booking portal</td>
+                  <td>$8,400</td>
+                  <td><span class="status blue">New</span></td>
+                  <td>Brandon</td>
+                  <td>Send discovery questions</td>
+                </tr>
+                <tr data-status="qualified">
+                  <td>Northline Print Co.</td>
+                  <td>Quote automation</td>
+                  <td>$6,200</td>
+                  <td><span class="status teal">Qualified</span></td>
+                  <td>Brandon</td>
+                  <td>Review workflow map</td>
+                </tr>
+                <tr data-status="proposal">
+                  <td>Summit Home Care</td>
+                  <td>Care shift dashboard</td>
+                  <td>$11,800</td>
+                  <td><span class="status amber">Proposal</span></td>
+                  <td>Brandon</td>
+                  <td>Finalize scope</td>
+                </tr>
+                <tr data-status="qualified">
+                  <td>Beacon Auto Detail</td>
+                  <td>Service scheduler</td>
+                  <td>$4,900</td>
+                  <td><span class="status teal">Qualified</span></td>
+                  <td>Brandon</td>
+                  <td>Price booking rules</td>
+                </tr>
+                <tr data-status="won">
+                  <td>Pastel Print Labs</td>
+                  <td>Headless storefront</td>
+                  <td>$7,500</td>
+                  <td><span class="status teal">Won</span></td>
+                  <td>Brandon</td>
+                  <td>Handoff checklist</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <aside class="panel">
+          <div class="panel-header">
+            <div>
+              <h2 class="panel-title">Stage value</h2>
+              <p class="panel-subtitle">Revenue grouped by decision stage.</p>
+            </div>
+          </div>
+          <div class="bar-stack">
+            <div class="bar-row">
+              <div class="bar-label"><span>Discovery</span><strong>$13.3k</strong></div>
+              <div class="bar-track"><span style="width: 42%"></span></div>
+            </div>
+            <div class="bar-row">
+              <div class="bar-label"><span>Qualified</span><strong>$19.7k</strong></div>
+              <div class="bar-track"><span style="width: 64%"></span></div>
+            </div>
+            <div class="bar-row">
+              <div class="bar-label"><span>Proposal</span><strong>$11.8k</strong></div>
+              <div class="bar-track"><span style="width: 38%"></span></div>
+            </div>
+            <div class="bar-row">
+              <div class="bar-label"><span>Won</span><strong>$7.5k</strong></div>
+              <div class="bar-track"><span style="width: 28%"></span></div>
+            </div>
+          </div>
+        </aside>
+      </main>
+
+      <section class="split-panel">
+        <article class="panel">
+          <div class="panel-header">
+            <div>
+              <h2 class="panel-title">Follow-up priority</h2>
+              <p class="panel-subtitle">Next moves that protect revenue.</p>
+            </div>
+          </div>
+          <div class="side-list">
+            <div class="side-item">
+              <strong>Call Summit Home Care by 2:00 PM</strong>
+              <span>Proposal is waiting on two reporting fields and handoff scope.</span>
+            </div>
+            <div class="side-item">
+              <strong>Send Harbor Dental intake worksheet</strong>
+              <span>Booking rules and provider availability need confirmation.</span>
+            </div>
+            <div class="side-item">
+              <strong>Package Pastel Print Labs case notes</strong>
+              <span>Capture stack, deployment path, and client ownership details.</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="panel">
+          <div class="panel-header">
+            <div>
+              <h2 class="panel-title">Automation targets</h2>
+              <p class="panel-subtitle">Workflows ready for backend logic.</p>
+            </div>
+          </div>
+          <div class="side-list">
+            <div class="side-item">
+              <strong>Lead scoring</strong>
+              <span>Rank opportunities by budget, urgency, timeline, and fit.</span>
+            </div>
+            <div class="side-item">
+              <strong>Quote generation</strong>
+              <span>Turn selected service packages into reusable proposal drafts.</span>
+            </div>
+            <div class="side-item">
+              <strong>Client reminders</strong>
+              <span>Trigger follow-up email sequences when a stage changes.</span>
+            </div>
+          </div>
+        </article>
+      </section>
+
+      <p class="footer-note">
+        Portfolio demo built as a static front-end prototype for GitHub Pages.
+      </p>
+    </div>
+
+    <script>
+      const buttons = document.querySelectorAll("[data-filter]");
+      const rows = document.querySelectorAll("#lead-table tr");
+      const count = document.querySelector("#lead-count");
+
+      buttons.forEach((button) => {
+        button.addEventListener("click", () => {
+          const filter = button.dataset.filter;
+          buttons.forEach((item) => item.classList.toggle("active", item === button));
+
+          let visible = 0;
+          rows.forEach((row) => {
+            const shouldShow = filter === "all" || row.dataset.status === filter;
+            row.style.display = shouldShow ? "" : "none";
+            if (shouldShow) {
+              visible += 1;
+            }
+          });
+
+          count.textContent = filter === "all" ? "38" : visible;
+        });
+      });
+    </script>
+  </body>
+</html>

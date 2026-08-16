@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>StockPilot Inventory Demo</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;700&family=Inter:wght@500;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="../assets/demo.css" />
+  </head>
+
+  <body>
+    <div class="demo-shell">
+      <nav class="demo-nav">
+        <a class="demo-brand" href="../../">
+          <span class="brand-mark"><i class="fa-solid fa-boxes-stacked"></i></span>
+          StockPilot
+        </a>
+        <div class="demo-nav-actions">
+          <a class="ghost-link" href="../../#project-demos">Back to portfolio</a>
+          <a class="primary-link" href="mailto:bmcgahuey@gmail.com">Request a build</a>
+        </div>
+      </nav>
+
+      <header class="demo-header">
+        <section class="hero-copy">
+          <p class="eyebrow">Inventory operations dashboard</p>
+          <h1>Stock, suppliers, and reorder risk in one calm workspace.</h1>
+          <p>
+            A planning console for businesses that need inventory counts,
+            purchasing decisions, sales velocity, and supplier timing visible
+            before products run out.
+          </p>
+        </section>
+
+        <aside class="signal-card">
+          <div>
+            <div class="signal-header">
+              <span>Stock confidence</span>
+              <span class="status-dot"></span>
+            </div>
+            <div class="signal-number">91%</div>
+            <div class="signal-label">items above reorder threshold</div>
+          </div>
+          <div class="signal-chart" aria-label="Inventory health chart">
+            <span style="height: 88%"></span>
+            <span style="height: 76%"></span>
+            <span style="height: 62%"></span>
+            <span style="height: 91%"></span>
+            <span style="height: 54%"></span>
+            <span style="height: 69%"></span>
+            <span style="height: 83%"></span>
+            <span style="height: 96%"></span>
+          </div>
+        </aside>
+      </header>
+
+      <section class="metric-grid" aria-label="Inventory metrics">
+        <article class="metric-card">
+          <span>Units tracked</span>
+          <strong>4,820</strong>
+          <small>across 7 categories</small>
+        </article>
+        <article class="metric-card">
+          <span>Runout risk</span>
+          <strong id="risk-count">6</strong>
+          <small>priority items</small>
+        </article>
+        <article class="metric-card">
+          <span>Open POs</span>
+          <strong>$12.6k</strong>
+          <small>3 suppliers active</small>
+        </article>
+        <article class="metric-card">
+          <span>Supplier SLA</span>
+          <strong>94%</strong>
+          <small>on-time this month</small>
+        </article>
+      </section>
+
+      <main class="workspace">
+        <section class="panel">
+          <div class="panel-header">
+            <div>
+              <h2 class="panel-title">Inventory control</h2>
+              <p class="panel-subtitle">Filter products by restock condition.</p>
+            </div>
+            <div class="segmented" aria-label="Inventory filters">
+              <button class="active" data-stock-filter="all">All</button>
+              <button data-stock-filter="low">Low stock</button>
+              <button data-stock-filter="watch">Watch</button>
+              <button data-stock-filter="healthy">Healthy</button>
+              <button data-stock-filter="overstock">Overstock</button>
+            </div>
+          </div>
+
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>SKU</th>
+                  <th>Item</th>
+                  <th>On hand</th>
+                  <th>Velocity</th>
+                  <th>Status</th>
+                  <th>Recommended move</th>
+                </tr>
+              </thead>
+              <tbody id="inventory-table">
+                <tr data-stock="low">
+                  <td>PPL-FIL-PLA-PNK</td>
+                  <td>Pastel pink filament</td>
+                  <td>18 rolls</td>
+                  <td>9/day</td>
+                  <td><span class="status rose">Low stock</span></td>
+                  <td>Order 72 rolls</td>
+                </tr>
+                <tr data-stock="watch">
+                  <td>PPL-BOX-6X6</td>
+                  <td>Mailer box 6x6</td>
+                  <td>240 units</td>
+                  <td>34/day</td>
+                  <td><span class="status amber">Watch</span></td>
+                  <td>Confirm vendor ETA</td>
+                </tr>
+                <tr data-stock="healthy">
+                  <td>PPL-RES-MATTE</td>
+                  <td>Matte finishing resin</td>
+                  <td>46 bottles</td>
+                  <td>3/day</td>
+                  <td><span class="status teal">Healthy</span></td>
+                  <td>Hold current plan</td>
+                </tr>
+                <tr data-stock="low">
+                  <td>PPL-LBL-ROUND</td>
+                  <td>Round brand labels</td>
+                  <td>120 labels</td>
+                  <td>55/day</td>
+                  <td><span class="status rose">Low stock</span></td>
+                  <td>Rush reorder</td>
+                </tr>
+                <tr data-stock="overstock">
+                  <td>PPL-FIL-ABS-BLK</td>
+                  <td>Black ABS filament</td>
+                  <td>180 rolls</td>
+                  <td>2/day</td>
+                  <td><span class="status blue">Overstock</span></td>
+                  <td>Pause purchasing</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <aside class="panel">
+          <div class="panel-header">
+            <div>
+              <h2 class="panel-title">Category velocity</h2>
+              <p class="panel-subtitle">Demand signals for reorder planning.</p>
+            </div>
+          </div>
+          <div class="bar-stack">
+            <div class="bar-row">
+              <div class="bar-label"><span>Filament</span><strong>86%</strong></div>
+              <div class="bar-track"><span style="width: 86%"></span></div>
+            </div>
+            <div class="bar-row">
+              <div class="bar-label"><span>Packaging</span><strong>74%</strong></div>
+              <div class="bar-track"><span style="width: 74%"></span></div>
+            </div>
+            <div class="bar-row">
+              <div class="bar-label"><span>Finishing</span><strong>48%</strong></div>
+              <div class="bar-track"><span style="width: 48%"></span></div>
+            </div>
+            <div class="bar-row">
+              <div class="bar-label"><span>Labels</span><strong>92%</strong></div>
+              <div class="bar-track"><span style="width: 92%"></span></div>
+            </div>
+          </div>
+        </aside>
+      </main>
+
+      <section class="split-panel">
+        <article class="panel">
+          <div class="panel-header">
+            <div>
+              <h2 class="panel-title">Purchase queue</h2>
+              <p class="panel-subtitle">Orders ranked by business impact.</p>
+            </div>
+          </div>
+          <div class="side-list">
+            <div class="side-item">
+              <strong>Rush labels before Friday</strong>
+              <span>Current stock covers 2.1 selling days at present order volume.</span>
+            </div>
+            <div class="side-item">
+              <strong>Consolidate filament PO</strong>
+              <span>Pink and lavender variants qualify for volume discount.</span>
+            </div>
+            <div class="side-item">
+              <strong>Pause black ABS reorder</strong>
+              <span>Current stock exceeds 70 days of average demand.</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="panel">
+          <div class="panel-header">
+            <div>
+              <h2 class="panel-title">Future build paths</h2>
+              <p class="panel-subtitle">Backend features ready for production.</p>
+            </div>
+          </div>
+          <div class="side-list">
+            <div class="side-item">
+              <strong>Supplier API sync</strong>
+              <span>Pull ETA and cost changes into purchasing decisions.</span>
+            </div>
+            <div class="side-item">
+              <strong>Demand forecasting</strong>
+              <span>Predict runout dates from recent order velocity and seasonality.</span>
+            </div>
+            <div class="side-item">
+              <strong>Low-stock alerts</strong>
+              <span>Send reorder tasks to Slack, email, or a manager dashboard.</span>
+            </div>
+          </div>
+        </article>
+      </section>
+
+      <p class="footer-note">
+        Portfolio demo built as a static front-end prototype for GitHub Pages.
+      </p>
+    </div>
+
+    <script>
+      const stockButtons = document.querySelectorAll("[data-stock-filter]");
+      const stockRows = document.querySelectorAll("#inventory-table tr");
+      const riskCount = document.querySelector("#risk-count");
+
+      stockButtons.forEach((button) => {
+        button.addEventListener("click", () => {
+          const filter = button.dataset.stockFilter;
+          stockButtons.forEach((item) => item.classList.toggle("active", item === button));
+
+          let visible = 0;
+          let risky = 0;
+          stockRows.forEach((row) => {
+            const shouldShow = filter === "all" || row.dataset.stock === filter;
+            row.style.display = shouldShow ? "" : "none";
+            if (shouldShow) {
+              visible += 1;
+            }
+            if (row.dataset.stock === "low") {
+              risky += 1;
+            }
+          });
+
+          riskCount.textContent = filter === "all" ? "6" : visible || risky;
+        });
+      });
+    </script>
+  </body>
+</html>
