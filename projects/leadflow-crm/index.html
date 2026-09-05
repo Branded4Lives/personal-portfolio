@@ -7,7 +7,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;700&family=Inter:wght@500;700;800&display=swap"
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;700&family=Inter:wght@500;700;800;900&display=swap"
       rel="stylesheet"
     />
     <link
@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="../assets/demo.css" />
   </head>
 
-  <body>
+  <body class="crm-demo">
     <div class="demo-shell">
       <nav class="demo-nav">
         <a class="demo-brand" href="../../">
@@ -30,208 +30,302 @@
         </div>
       </nav>
 
-      <header class="demo-header">
+      <header class="app-hero crm-hero">
         <section class="hero-copy">
-          <p class="eyebrow">Sales pipeline console</p>
-          <h1>Lead tracking for teams that need faster follow-up.</h1>
+          <p class="eyebrow">CRM pipeline product</p>
+          <h1>A sales pipeline that turns messy leads into next actions.</h1>
           <p>
-            A business CRM concept with intake triage, revenue stages, owner
-            accountability, and next-action visibility for every opportunity.
+            LeadFlow is a working front-end prototype for intake triage, stage
+            management, forecast totals, and owner follow-up. It shows stateful
+            UI, data modeling, and dashboard thinking for revenue teams.
           </p>
         </section>
 
-        <aside class="signal-card">
-          <div>
-            <div class="signal-header">
-              <span>Pipeline health</span>
-              <span class="status-dot"></span>
+        <aside class="hero-aside crm-hero-board" aria-label="Pipeline forecast snapshot">
+          <div class="forecast-number">
+            <div>
+              <span>Qualified pipeline</span>
+              <strong id="pipeline-value">$67k</strong>
             </div>
-            <div class="signal-number">$48k</div>
-            <div class="signal-label">qualified revenue in motion</div>
+            <span class="status teal">Healthy</span>
           </div>
-          <div class="signal-chart" aria-label="Pipeline activity chart">
-            <span style="height: 42%"></span>
-            <span style="height: 64%"></span>
-            <span style="height: 48%"></span>
-            <span style="height: 78%"></span>
-            <span style="height: 58%"></span>
-            <span style="height: 86%"></span>
-            <span style="height: 72%"></span>
-            <span style="height: 92%"></span>
+
+          <div class="funnel-list">
+            <div class="funnel-row">
+              <span>New</span>
+              <div class="funnel-track"><span style="width: 58%"></span></div>
+              <span>$18k</span>
+            </div>
+            <div class="funnel-row">
+              <span>Qualified</span>
+              <div class="funnel-track"><span style="width: 84%"></span></div>
+              <span>$29k</span>
+            </div>
+            <div class="funnel-row">
+              <span>Proposal</span>
+              <div class="funnel-track"><span style="width: 72%"></span></div>
+              <span>$20k</span>
+            </div>
           </div>
         </aside>
       </header>
 
-      <section class="metric-grid" aria-label="CRM metrics">
+      <section class="metric-strip" aria-label="CRM metrics">
         <article class="metric-card">
-          <span>Open leads</span>
-          <strong id="lead-count">38</strong>
-          <small>12 need action today</small>
+          <span>Visible deals</span>
+          <strong id="visible-deals">8</strong>
+          <small>updated by stage filter</small>
         </article>
         <article class="metric-card">
           <span>Avg. response</span>
-          <strong>2.4h</strong>
+          <strong>2.1h</strong>
           <small>31% faster this week</small>
         </article>
         <article class="metric-card">
-          <span>Forecast close</span>
-          <strong>63%</strong>
-          <small>based on active stage</small>
+          <span>Close confidence</span>
+          <strong id="close-confidence">42%</strong>
+          <small>from selected opportunity</small>
         </article>
         <article class="metric-card">
-          <span>Booked consults</span>
+          <span>Next actions</span>
           <strong>14</strong>
-          <small>8 confirmed</small>
+          <small>6 due today</small>
         </article>
       </section>
 
-      <main class="workspace">
-        <section class="panel">
+      <main class="crm-layout">
+        <section class="panel crm-board-panel">
           <div class="panel-header">
             <div>
-              <h2 class="panel-title">Opportunity queue</h2>
-              <p class="panel-subtitle">Filter leads by active business stage.</p>
+              <h2 class="panel-title">Pipeline board</h2>
+              <p class="panel-subtitle">Stage filtering and deal inspection without leaving the board.</p>
             </div>
-            <div class="segmented" aria-label="Lead filters">
-              <button class="active" data-filter="all">All</button>
-              <button data-filter="new">New</button>
-              <button data-filter="qualified">Qualified</button>
-              <button data-filter="proposal">Proposal</button>
-              <button data-filter="won">Won</button>
+            <div class="segmented" aria-label="Pipeline filters">
+              <button class="active" data-stage-filter="all">All</button>
+              <button data-stage-filter="new">New</button>
+              <button data-stage-filter="qualified">Qualified</button>
+              <button data-stage-filter="proposal">Proposal</button>
+              <button data-stage-filter="won">Won</button>
             </div>
           </div>
 
-          <div class="table-wrap">
-            <table>
-              <thead>
-                <tr>
-                  <th>Lead</th>
-                  <th>Need</th>
-                  <th>Budget</th>
-                  <th>Status</th>
-                  <th>Owner</th>
-                  <th>Next action</th>
-                </tr>
-              </thead>
-              <tbody id="lead-table">
-                <tr data-status="new">
-                  <td>Harbor Dental</td>
-                  <td>Patient booking portal</td>
-                  <td>$8,400</td>
-                  <td><span class="status blue">New</span></td>
-                  <td>Brandon</td>
-                  <td>Send discovery questions</td>
-                </tr>
-                <tr data-status="qualified">
-                  <td>Northline Print Co.</td>
-                  <td>Quote automation</td>
-                  <td>$6,200</td>
-                  <td><span class="status teal">Qualified</span></td>
-                  <td>Brandon</td>
-                  <td>Review workflow map</td>
-                </tr>
-                <tr data-status="proposal">
-                  <td>Summit Home Care</td>
-                  <td>Care shift dashboard</td>
-                  <td>$11,800</td>
-                  <td><span class="status amber">Proposal</span></td>
-                  <td>Brandon</td>
-                  <td>Finalize scope</td>
-                </tr>
-                <tr data-status="qualified">
-                  <td>Beacon Auto Detail</td>
-                  <td>Service scheduler</td>
-                  <td>$4,900</td>
-                  <td><span class="status teal">Qualified</span></td>
-                  <td>Brandon</td>
-                  <td>Price booking rules</td>
-                </tr>
-                <tr data-status="won">
-                  <td>Pastel Print Labs</td>
-                  <td>Headless storefront</td>
-                  <td>$7,500</td>
-                  <td><span class="status teal">Won</span></td>
-                  <td>Brandon</td>
-                  <td>Handoff checklist</td>
-                </tr>
-              </tbody>
-            </table>
+          <div class="pipeline-board" id="pipeline-board">
+            <section class="pipeline-column" aria-label="New leads">
+              <div class="column-heading">
+                <h3>New</h3>
+                <span>2 deals</span>
+              </div>
+              <button
+                class="deal-card active"
+                data-stage="new"
+                data-company="Harbor Dental"
+                data-need="Patient booking portal"
+                data-value="8400"
+                data-owner="Brandon"
+                data-action="Send discovery worksheet"
+                data-confidence="42%"
+                data-notes="Needs provider availability rules, insurance notes, and a first-pass intake form."
+              >
+                <span class="deal-company">Harbor Dental</span>
+                <span class="deal-meta">Patient booking portal</span>
+                <span class="deal-value">$8.4k</span>
+                <span class="deal-tags"><span>Healthcare</span><span>Booking</span></span>
+              </button>
+              <button
+                class="deal-card"
+                data-stage="new"
+                data-company="Cedar Cafe"
+                data-need="Catering quote intake"
+                data-value="9600"
+                data-owner="Brandon"
+                data-action="Map quote variables"
+                data-confidence="35%"
+                data-notes="Menu size, delivery zones, and event capacity will drive the first automation pass."
+              >
+                <span class="deal-company">Cedar Cafe</span>
+                <span class="deal-meta">Catering quote intake</span>
+                <span class="deal-value">$9.6k</span>
+                <span class="deal-tags"><span>Forms</span><span>Automation</span></span>
+              </button>
+            </section>
+
+            <section class="pipeline-column" aria-label="Qualified opportunities">
+              <div class="column-heading">
+                <h3>Qualified</h3>
+                <span>3 deals</span>
+              </div>
+              <button
+                class="deal-card"
+                data-stage="qualified"
+                data-company="Northline Print Co."
+                data-need="Quote automation"
+                data-value="6200"
+                data-owner="Brandon"
+                data-action="Review workflow map"
+                data-confidence="67%"
+                data-notes="Static pricing table is ready. Next step is turning sizes and finishes into reusable quote rules."
+              >
+                <span class="deal-company">Northline Print Co.</span>
+                <span class="deal-meta">Quote automation</span>
+                <span class="deal-value">$6.2k</span>
+                <span class="deal-tags"><span>Pricing</span><span>Ops</span></span>
+              </button>
+              <button
+                class="deal-card"
+                data-stage="qualified"
+                data-company="Beacon Auto Detail"
+                data-need="Service scheduler"
+                data-value="4900"
+                data-owner="Brandon"
+                data-action="Price booking rules"
+                data-confidence="58%"
+                data-notes="Package selection, add-ons, and crew capacity are the core scheduling constraints."
+              >
+                <span class="deal-company">Beacon Auto Detail</span>
+                <span class="deal-meta">Service scheduler</span>
+                <span class="deal-value">$4.9k</span>
+                <span class="deal-tags"><span>Services</span><span>Calendar</span></span>
+              </button>
+              <button
+                class="deal-card"
+                data-stage="qualified"
+                data-company="River City Fitness"
+                data-need="Member onboarding app"
+                data-value="17800"
+                data-owner="Brandon"
+                data-action="Confirm member data fields"
+                data-confidence="61%"
+                data-notes="New member flow needs waiver capture, first appointment routing, and trainer assignment."
+              >
+                <span class="deal-company">River City Fitness</span>
+                <span class="deal-meta">Member onboarding app</span>
+                <span class="deal-value">$17.8k</span>
+                <span class="deal-tags"><span>Portal</span><span>Data</span></span>
+              </button>
+            </section>
+
+            <section class="pipeline-column" aria-label="Proposal opportunities">
+              <div class="column-heading">
+                <h3>Proposal</h3>
+                <span>2 deals</span>
+              </div>
+              <button
+                class="deal-card"
+                data-stage="proposal"
+                data-company="Summit Home Care"
+                data-need="Care shift dashboard"
+                data-value="11800"
+                data-owner="Brandon"
+                data-action="Finalize reporting scope"
+                data-confidence="74%"
+                data-notes="Decision maker wants weekly staffing trends, late shift alerts, and role-based access."
+              >
+                <span class="deal-company">Summit Home Care</span>
+                <span class="deal-meta">Care shift dashboard</span>
+                <span class="deal-value">$11.8k</span>
+                <span class="deal-tags"><span>Reporting</span><span>Roles</span></span>
+              </button>
+              <button
+                class="deal-card"
+                data-stage="proposal"
+                data-company="Oak & Iron Studio"
+                data-need="Custom order tracker"
+                data-value="8200"
+                data-owner="Brandon"
+                data-action="Send build timeline"
+                data-confidence="69%"
+                data-notes="Client needs a status board, customer approvals, and production milestone emails."
+              >
+                <span class="deal-company">Oak & Iron Studio</span>
+                <span class="deal-meta">Custom order tracker</span>
+                <span class="deal-value">$8.2k</span>
+                <span class="deal-tags"><span>Orders</span><span>Email</span></span>
+              </button>
+            </section>
+
+            <section class="pipeline-column" aria-label="Won work">
+              <div class="column-heading">
+                <h3>Won</h3>
+                <span>1 deal</span>
+              </div>
+              <button
+                class="deal-card"
+                data-stage="won"
+                data-company="Pastel Print Labs"
+                data-need="Headless storefront"
+                data-value="7500"
+                data-owner="Brandon"
+                data-action="Package handoff notes"
+                data-confidence="100%"
+                data-notes="Storefront shipped with Shopify cart flow, deployment notes, and a client ownership checklist."
+              >
+                <span class="deal-company">Pastel Print Labs</span>
+                <span class="deal-meta">Headless storefront</span>
+                <span class="deal-value">$7.5k</span>
+                <span class="deal-tags"><span>React</span><span>Shopify</span></span>
+              </button>
+            </section>
           </div>
         </section>
 
-        <aside class="panel">
+        <aside class="panel deal-inspector" aria-live="polite">
           <div class="panel-header">
             <div>
-              <h2 class="panel-title">Stage value</h2>
-              <p class="panel-subtitle">Revenue grouped by decision stage.</p>
+              <h2 class="panel-title">Deal inspector</h2>
+              <p class="panel-subtitle">Selected opportunity context.</p>
+            </div>
+            <span class="status blue" id="inspector-stage">New</span>
+          </div>
+
+          <div class="inspector-stack">
+            <div>
+              <span class="inspector-label">Company</span>
+              <strong class="inspector-value" id="inspector-company">Harbor Dental</strong>
+            </div>
+            <div>
+              <span class="inspector-label">Need</span>
+              <strong class="inspector-value" id="inspector-need">Patient booking portal</strong>
+            </div>
+            <div>
+              <span class="inspector-label">Next action</span>
+              <strong class="inspector-value" id="inspector-action">Send discovery worksheet</strong>
+            </div>
+            <div>
+              <span class="inspector-label">Notes</span>
+              <strong class="inspector-value" id="inspector-notes">
+                Needs provider availability rules, insurance notes, and a first-pass intake form.
+              </strong>
             </div>
           </div>
-          <div class="bar-stack">
-            <div class="bar-row">
-              <div class="bar-label"><span>Discovery</span><strong>$13.3k</strong></div>
-              <div class="bar-track"><span style="width: 42%"></span></div>
+
+          <div class="timeline" aria-label="Recent CRM activity">
+            <div class="timeline-item">
+              <strong>Discovery email opened</strong>
+              <span>Tracked as a warm signal for same-day follow-up.</span>
             </div>
-            <div class="bar-row">
-              <div class="bar-label"><span>Qualified</span><strong>$19.7k</strong></div>
-              <div class="bar-track"><span style="width: 64%"></span></div>
-            </div>
-            <div class="bar-row">
-              <div class="bar-label"><span>Proposal</span><strong>$11.8k</strong></div>
-              <div class="bar-track"><span style="width: 38%"></span></div>
-            </div>
-            <div class="bar-row">
-              <div class="bar-label"><span>Won</span><strong>$7.5k</strong></div>
-              <div class="bar-track"><span style="width: 28%"></span></div>
+            <div class="timeline-item">
+              <strong>Budget captured</strong>
+              <span>Forecast value updates automatically from selected deal data.</span>
             </div>
           </div>
         </aside>
       </main>
 
-      <section class="split-panel">
-        <article class="panel">
-          <div class="panel-header">
-            <div>
-              <h2 class="panel-title">Follow-up priority</h2>
-              <p class="panel-subtitle">Next moves that protect revenue.</p>
-            </div>
-          </div>
-          <div class="side-list">
-            <div class="side-item">
-              <strong>Call Summit Home Care by 2:00 PM</strong>
-              <span>Proposal is waiting on two reporting fields and handoff scope.</span>
-            </div>
-            <div class="side-item">
-              <strong>Send Harbor Dental intake worksheet</strong>
-              <span>Booking rules and provider availability need confirmation.</span>
-            </div>
-            <div class="side-item">
-              <strong>Package Pastel Print Labs case notes</strong>
-              <span>Capture stack, deployment path, and client ownership details.</span>
-            </div>
-          </div>
+      <section class="crm-automation-strip" aria-label="CRM build capabilities">
+        <article class="automation-card">
+          <i class="fa-solid fa-filter-circle-dollar" aria-hidden="true"></i>
+          <h3>Lead scoring</h3>
+          <p>Rank opportunities by budget, urgency, timeline, and service fit before they reach proposal.</p>
         </article>
-
-        <article class="panel">
-          <div class="panel-header">
-            <div>
-              <h2 class="panel-title">Automation targets</h2>
-              <p class="panel-subtitle">Workflows ready for backend logic.</p>
-            </div>
-          </div>
-          <div class="side-list">
-            <div class="side-item">
-              <strong>Lead scoring</strong>
-              <span>Rank opportunities by budget, urgency, timeline, and fit.</span>
-            </div>
-            <div class="side-item">
-              <strong>Quote generation</strong>
-              <span>Turn selected service packages into reusable proposal drafts.</span>
-            </div>
-            <div class="side-item">
-              <strong>Client reminders</strong>
-              <span>Trigger follow-up email sequences when a stage changes.</span>
-            </div>
-          </div>
+        <article class="automation-card">
+          <i class="fa-solid fa-file-signature" aria-hidden="true"></i>
+          <h3>Proposal workflow</h3>
+          <p>Turn selected service packages into reusable proposal drafts and handoff checklists.</p>
+        </article>
+        <article class="automation-card">
+          <i class="fa-solid fa-bell" aria-hidden="true"></i>
+          <h3>Follow-up automation</h3>
+          <p>Trigger reminders when deals stall, stage changes happen, or high-value leads need attention.</p>
         </article>
       </section>
 
@@ -241,27 +335,78 @@
     </div>
 
     <script>
-      const buttons = document.querySelectorAll("[data-filter]");
-      const rows = document.querySelectorAll("#lead-table tr");
-      const count = document.querySelector("#lead-count");
+      const currency = new Intl.NumberFormat("en-US", {
+        style: "currency",
+        currency: "USD",
+        maximumFractionDigits: 0,
+      });
 
-      buttons.forEach((button) => {
+      const stageButtons = document.querySelectorAll("[data-stage-filter]");
+      const dealCards = document.querySelectorAll(".deal-card");
+      const visibleDeals = document.querySelector("#visible-deals");
+      const pipelineValue = document.querySelector("#pipeline-value");
+      const closeConfidence = document.querySelector("#close-confidence");
+      const inspectorStage = document.querySelector("#inspector-stage");
+      const inspectorCompany = document.querySelector("#inspector-company");
+      const inspectorNeed = document.querySelector("#inspector-need");
+      const inspectorAction = document.querySelector("#inspector-action");
+      const inspectorNotes = document.querySelector("#inspector-notes");
+
+      const stageLabels = {
+        new: "New",
+        qualified: "Qualified",
+        proposal: "Proposal",
+        won: "Won",
+      };
+
+      function selectDeal(card) {
+        dealCards.forEach((deal) => deal.classList.toggle("active", deal === card));
+        inspectorCompany.textContent = card.dataset.company;
+        inspectorNeed.textContent = card.dataset.need;
+        inspectorAction.textContent = card.dataset.action;
+        inspectorNotes.textContent = card.dataset.notes;
+        inspectorStage.textContent = stageLabels[card.dataset.stage];
+        closeConfidence.textContent = card.dataset.confidence;
+      }
+
+      function applyStageFilter(stage) {
+        let count = 0;
+        let value = 0;
+
+        dealCards.forEach((card) => {
+          const isVisible = stage === "all" || card.dataset.stage === stage;
+          card.hidden = !isVisible;
+          if (isVisible) {
+            count += 1;
+            value += Number(card.dataset.value);
+          }
+        });
+
+        visibleDeals.textContent = count;
+        pipelineValue.textContent = currency.format(value);
+
+        const selected = document.querySelector(".deal-card.active");
+        if (!selected || selected.hidden) {
+          const firstVisible = Array.from(dealCards).find((card) => !card.hidden);
+          if (firstVisible) {
+            selectDeal(firstVisible);
+          }
+        }
+      }
+
+      stageButtons.forEach((button) => {
         button.addEventListener("click", () => {
-          const filter = button.dataset.filter;
-          buttons.forEach((item) => item.classList.toggle("active", item === button));
-
-          let visible = 0;
-          rows.forEach((row) => {
-            const shouldShow = filter === "all" || row.dataset.status === filter;
-            row.style.display = shouldShow ? "" : "none";
-            if (shouldShow) {
-              visible += 1;
-            }
-          });
-
-          count.textContent = filter === "all" ? "38" : visible;
+          stageButtons.forEach((item) => item.classList.toggle("active", item === button));
+          applyStageFilter(button.dataset.stageFilter);
         });
       });
+
+      dealCards.forEach((card) => {
+        card.addEventListener("click", () => selectDeal(card));
+      });
+
+      applyStageFilter("all");
+      selectDeal(document.querySelector(".deal-card.active"));
     </script>
   </body>
 </html>

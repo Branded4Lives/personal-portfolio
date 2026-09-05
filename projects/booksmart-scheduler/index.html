@@ -7,7 +7,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;700&family=Inter:wght@500;700;800&display=swap"
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;700&family=Inter:wght@500;700;800;900&display=swap"
       rel="stylesheet"
     />
     <link
@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="../assets/demo.css" />
   </head>
 
-  <body>
+  <body class="scheduler-demo">
     <div class="demo-shell">
       <nav class="demo-nav">
         <a class="demo-brand" href="../../">
@@ -30,44 +30,51 @@
         </div>
       </nav>
 
-      <header class="demo-header">
+      <header class="app-hero scheduler-hero">
         <section class="hero-copy">
-          <p class="eyebrow">Scheduling and dispatch console</p>
-          <h1>Appointments, staff capacity, and service queues in sync.</h1>
+          <p class="eyebrow">Scheduling and intake system</p>
+          <h1>A booking console for services that depend on capacity.</h1>
           <p>
-            A booking operations concept for teams that need daily schedules,
-            customer intake, staff utilization, and follow-up work in one
-            predictable interface.
+            BookSmart shows calendar state, service selection, slot filtering,
+            booking summaries, and waitlist routing. It is shaped like a real
+            service business tool rather than another generic analytics page.
           </p>
         </section>
 
-        <aside class="signal-card">
-          <div>
-            <div class="signal-header">
-              <span>Team utilization</span>
-              <span class="status-dot"></span>
-            </div>
-            <div class="signal-number">82%</div>
-            <div class="signal-label">booked capacity for selected day</div>
+        <aside class="hero-aside week-snapshot" aria-label="Weekly capacity snapshot">
+          <div class="snapshot-day">
+            <strong>Monday</strong>
+            <div class="snapshot-track"><span style="width: 82%"></span></div>
+            <em>82%</em>
           </div>
-          <div class="signal-chart" aria-label="Daily utilization chart">
-            <span style="height: 58%"></span>
-            <span style="height: 72%"></span>
-            <span style="height: 91%"></span>
-            <span style="height: 82%"></span>
-            <span style="height: 67%"></span>
-            <span style="height: 76%"></span>
-            <span style="height: 64%"></span>
-            <span style="height: 48%"></span>
+          <div class="snapshot-day">
+            <strong>Tuesday</strong>
+            <div class="snapshot-track"><span style="width: 64%"></span></div>
+            <em>64%</em>
+          </div>
+          <div class="snapshot-day">
+            <strong>Wednesday</strong>
+            <div class="snapshot-track"><span style="width: 91%"></span></div>
+            <em>91%</em>
+          </div>
+          <div class="snapshot-day">
+            <strong>Thursday</strong>
+            <div class="snapshot-track"><span style="width: 48%"></span></div>
+            <em>48%</em>
+          </div>
+          <div class="snapshot-day">
+            <strong>Friday</strong>
+            <div class="snapshot-track"><span style="width: 72%"></span></div>
+            <em>72%</em>
           </div>
         </aside>
       </header>
 
-      <section class="metric-grid" aria-label="Scheduling metrics">
+      <section class="metric-strip" aria-label="Scheduling metrics">
         <article class="metric-card">
-          <span>Bookings today</span>
-          <strong id="booking-count">18</strong>
-          <small>4 same-day requests</small>
+          <span>Open slots</span>
+          <strong id="open-slot-count">8</strong>
+          <small>updated by slot filter</small>
         </article>
         <article class="metric-card">
           <span>Waitlist</span>
@@ -80,159 +87,278 @@
           <small>reminders sent</small>
         </article>
         <article class="metric-card">
-          <span>Projected revenue</span>
-          <strong>$3.8k</strong>
-          <small>for selected day</small>
+          <span>Selected deposit</span>
+          <strong id="selected-deposit">$35</strong>
+          <small>from service type</small>
         </article>
       </section>
 
-      <main class="workspace">
-        <section class="panel">
+      <main class="scheduler-layout">
+        <section class="panel schedule-planner">
           <div class="panel-header">
             <div>
-              <h2 class="panel-title">Daily schedule</h2>
-              <p class="panel-subtitle">Switch days to review capacity and service mix.</p>
+              <h2 class="panel-title">Weekly appointment grid</h2>
+              <p class="panel-subtitle">Selectable slots with capacity and service context.</p>
             </div>
-            <div class="segmented" aria-label="Day filters">
-              <button class="active" data-day="monday">Mon</button>
-              <button data-day="tuesday">Tue</button>
-              <button data-day="wednesday">Wed</button>
+            <div class="segmented" aria-label="Slot filters">
+              <button class="active" data-slot-filter="all">All</button>
+              <button data-slot-filter="open">Open</button>
+              <button data-slot-filter="waitlist">Waitlist</button>
+              <button data-slot-filter="blocked">Blocked</button>
             </div>
           </div>
 
-          <div class="schedule-grid" id="schedule-grid">
-            <article class="schedule-card" data-schedule-day="monday">
-              <span class="time-chip">8:30</span>
-              <div>
-                <strong>Website discovery call</strong>
-                <span>Blue Ridge Repairs - service portal requirements</span>
+          <div class="week-calendar" id="week-calendar">
+            <section class="day-column" aria-label="Monday appointments">
+              <div class="day-heading">
+                <h3>Mon</h3>
+                <span>18 bookings</span>
               </div>
-              <span class="status teal">Confirmed</span>
-            </article>
-            <article class="schedule-card" data-schedule-day="monday">
-              <span class="time-chip">10:00</span>
-              <div>
-                <strong>Intake form review</strong>
-                <span>Harbor Dental - provider booking rules</span>
+              <button
+                class="slot-card active"
+                data-slot-type="open"
+                data-time="Mon 8:30 AM"
+                data-staff="Avery"
+                data-room="Studio A"
+                data-status="Open"
+              >
+                <span class="slot-time">8:30 AM</span>
+                <strong>Website consult</strong>
+                <small>Avery, Studio A</small>
+                <span class="status green">Open</span>
+              </button>
+              <button
+                class="slot-card"
+                data-slot-type="waitlist"
+                data-time="Mon 10:00 AM"
+                data-staff="Mika"
+                data-room="Remote"
+                data-status="Waitlist"
+              >
+                <span class="slot-time">10:00 AM</span>
+                <strong>Intake review</strong>
+                <small>Mika, Remote</small>
+                <span class="status amber">Waitlist</span>
+              </button>
+              <button
+                class="slot-card"
+                data-slot-type="open"
+                data-time="Mon 1:30 PM"
+                data-staff="Avery"
+                data-room="Studio B"
+                data-status="Open"
+              >
+                <span class="slot-time">1:30 PM</span>
+                <strong>Workflow map</strong>
+                <small>Avery, Studio B</small>
+                <span class="status green">Open</span>
+              </button>
+            </section>
+
+            <section class="day-column" aria-label="Tuesday appointments">
+              <div class="day-heading">
+                <h3>Tue</h3>
+                <span>15 bookings</span>
               </div>
-              <span class="status blue">Remote</span>
-            </article>
-            <article class="schedule-card" data-schedule-day="monday">
-              <span class="time-chip">1:30</span>
-              <div>
-                <strong>Workflow mapping session</strong>
-                <span>Northline Print Co. - quote automation</span>
+              <button
+                class="slot-card"
+                data-slot-type="blocked"
+                data-time="Tue 9:15 AM"
+                data-staff="Team"
+                data-room="Internal"
+                data-status="Blocked"
+              >
+                <span class="slot-time">9:15 AM</span>
+                <strong>Staff planning</strong>
+                <small>Team, Internal</small>
+                <span class="status rose">Blocked</span>
+              </button>
+              <button
+                class="slot-card"
+                data-slot-type="open"
+                data-time="Tue 11:45 AM"
+                data-staff="Mika"
+                data-room="Remote"
+                data-status="Open"
+              >
+                <span class="slot-time">11:45 AM</span>
+                <strong>Checkout QA</strong>
+                <small>Mika, Remote</small>
+                <span class="status green">Open</span>
+              </button>
+            </section>
+
+            <section class="day-column" aria-label="Wednesday appointments">
+              <div class="day-heading">
+                <h3>Wed</h3>
+                <span>21 bookings</span>
               </div>
-              <span class="status amber">Prep</span>
-            </article>
-            <article class="schedule-card" data-schedule-day="tuesday" hidden>
-              <span class="time-chip">9:15</span>
-              <div>
-                <strong>Client onboarding</strong>
-                <span>Summit Home Care - dashboard roles</span>
-              </div>
-              <span class="status teal">Confirmed</span>
-            </article>
-            <article class="schedule-card" data-schedule-day="tuesday" hidden>
-              <span class="time-chip">11:45</span>
-              <div>
-                <strong>Checkout test window</strong>
-                <span>Pastel Print Labs - order flow QA</span>
-              </div>
-              <span class="status blue">QA</span>
-            </article>
-            <article class="schedule-card" data-schedule-day="wednesday" hidden>
-              <span class="time-chip">8:00</span>
-              <div>
+              <button
+                class="slot-card"
+                data-slot-type="waitlist"
+                data-time="Wed 8:00 AM"
+                data-staff="Avery"
+                data-room="Studio A"
+                data-status="Waitlist"
+              >
+                <span class="slot-time">8:00 AM</span>
                 <strong>Estimate review</strong>
-                <span>Beacon Auto Detail - package pricing logic</span>
+                <small>Avery, Studio A</small>
+                <span class="status amber">Waitlist</span>
+              </button>
+              <button
+                class="slot-card"
+                data-slot-type="open"
+                data-time="Wed 2:00 PM"
+                data-staff="Jules"
+                data-room="Studio C"
+                data-status="Open"
+              >
+                <span class="slot-time">2:00 PM</span>
+                <strong>Launch check</strong>
+                <small>Jules, Studio C</small>
+                <span class="status green">Open</span>
+              </button>
+            </section>
+
+            <section class="day-column" aria-label="Thursday appointments">
+              <div class="day-heading">
+                <h3>Thu</h3>
+                <span>11 bookings</span>
               </div>
-              <span class="status amber">Hold</span>
-            </article>
-            <article class="schedule-card" data-schedule-day="wednesday" hidden>
-              <span class="time-chip">2:00</span>
-              <div>
-                <strong>Launch readiness check</strong>
-                <span>River City Fitness - content and domain checklist</span>
+              <button
+                class="slot-card"
+                data-slot-type="open"
+                data-time="Thu 10:30 AM"
+                data-staff="Mika"
+                data-room="Remote"
+                data-status="Open"
+              >
+                <span class="slot-time">10:30 AM</span>
+                <strong>Scope review</strong>
+                <small>Mika, Remote</small>
+                <span class="status green">Open</span>
+              </button>
+              <button
+                class="slot-card"
+                data-slot-type="open"
+                data-time="Thu 3:15 PM"
+                data-staff="Jules"
+                data-room="Studio B"
+                data-status="Open"
+              >
+                <span class="slot-time">3:15 PM</span>
+                <strong>Content handoff</strong>
+                <small>Jules, Studio B</small>
+                <span class="status green">Open</span>
+              </button>
+            </section>
+
+            <section class="day-column" aria-label="Friday appointments">
+              <div class="day-heading">
+                <h3>Fri</h3>
+                <span>16 bookings</span>
               </div>
-              <span class="status teal">Confirmed</span>
-            </article>
+              <button
+                class="slot-card"
+                data-slot-type="blocked"
+                data-time="Fri 9:00 AM"
+                data-staff="Team"
+                data-room="Internal"
+                data-status="Blocked"
+              >
+                <span class="slot-time">9:00 AM</span>
+                <strong>Release window</strong>
+                <small>Team, Internal</small>
+                <span class="status rose">Blocked</span>
+              </button>
+              <button
+                class="slot-card"
+                data-slot-type="open"
+                data-time="Fri 1:00 PM"
+                data-staff="Avery"
+                data-room="Studio A"
+                data-status="Open"
+              >
+                <span class="slot-time">1:00 PM</span>
+                <strong>Final walkthrough</strong>
+                <small>Avery, Studio A</small>
+                <span class="status green">Open</span>
+              </button>
+            </section>
           </div>
         </section>
 
-        <aside class="panel">
+        <aside class="panel booking-builder" aria-live="polite">
           <div class="panel-header">
             <div>
-              <h2 class="panel-title">Capacity by role</h2>
-              <p class="panel-subtitle">Staff time grouped by work type.</p>
+              <h2 class="panel-title">Booking builder</h2>
+              <p class="panel-subtitle">Slot and service details update together.</p>
             </div>
           </div>
-          <div class="bar-stack">
-            <div class="bar-row">
-              <div class="bar-label"><span>Discovery</span><strong>72%</strong></div>
-              <div class="bar-track"><span style="width: 72%"></span></div>
+
+          <label>
+            <span class="inspector-label">Service type</span>
+            <select class="select-control" id="service-select">
+              <option data-duration="45 min" data-deposit="$35" data-price="$180">Website consult</option>
+              <option data-duration="60 min" data-deposit="$50" data-price="$240">Workflow mapping</option>
+              <option data-duration="90 min" data-deposit="$75" data-price="$360">Launch QA block</option>
+            </select>
+          </label>
+
+          <div class="selected-slot">
+            <div class="slot-summary-row">
+              <span>Selected slot</span>
+              <strong id="selected-time">Mon 8:30 AM</strong>
             </div>
-            <div class="bar-row">
-              <div class="bar-label"><span>Build blocks</span><strong>88%</strong></div>
-              <div class="bar-track"><span style="width: 88%"></span></div>
+            <div class="slot-summary-row">
+              <span>Staff</span>
+              <strong id="selected-staff">Avery</strong>
             </div>
-            <div class="bar-row">
-              <div class="bar-label"><span>QA windows</span><strong>56%</strong></div>
-              <div class="bar-track"><span style="width: 56%"></span></div>
+            <div class="slot-summary-row">
+              <span>Location</span>
+              <strong id="selected-room">Studio A</strong>
             </div>
-            <div class="bar-row">
-              <div class="bar-label"><span>Admin</span><strong>34%</strong></div>
-              <div class="bar-track"><span style="width: 34%"></span></div>
+            <div class="slot-summary-row">
+              <span>Status</span>
+              <strong id="selected-status">Open</strong>
             </div>
           </div>
+
+          <div class="service-summary">
+            <div class="service-summary-row">
+              <span>Duration</span>
+              <strong id="service-duration">45 min</strong>
+            </div>
+            <div class="service-summary-row">
+              <span>Price</span>
+              <strong id="service-price">$180</strong>
+            </div>
+          </div>
+
+          <button class="primary-button" type="button" id="reserve-button">
+            <i class="fa-solid fa-check" aria-hidden="true"></i>
+            Reserve slot
+          </button>
+          <p class="reserve-state" id="reserve-state">Draft booking ready.</p>
         </aside>
       </main>
 
-      <section class="split-panel">
-        <article class="panel">
-          <div class="panel-header">
-            <div>
-              <h2 class="panel-title">Intake queue</h2>
-              <p class="panel-subtitle">Requests waiting for routing.</p>
-            </div>
-          </div>
-          <div class="side-list">
-            <div class="side-item">
-              <strong>New booking: same-day repair consultation</strong>
-              <span>Customer selected urgent priority and uploaded reference photos.</span>
-            </div>
-            <div class="side-item">
-              <strong>Reschedule request: Tuesday 11:45</strong>
-              <span>Move checkout QA to the afternoon if the client confirms.</span>
-            </div>
-            <div class="side-item">
-              <strong>Waitlist candidate: River City Fitness</strong>
-              <span>Could fill an open QA window if assets arrive by noon.</span>
-            </div>
-          </div>
+      <section class="ops-grid" aria-label="Scheduling operations">
+        <article class="ops-card">
+          <i class="fa-solid fa-inbox" aria-hidden="true"></i>
+          <h3>Intake queue</h3>
+          <p>Route new requests by urgency, service type, staff skill, and the customer details already captured.</p>
         </article>
-
-        <article class="panel">
-          <div class="panel-header">
-            <div>
-              <h2 class="panel-title">Production extensions</h2>
-              <p class="panel-subtitle">Backend features a business could add next.</p>
-            </div>
-          </div>
-          <div class="side-list">
-            <div class="side-item">
-              <strong>Calendar sync</strong>
-              <span>Connect bookings to Google Calendar, Outlook, or staff calendars.</span>
-            </div>
-            <div class="side-item">
-              <strong>Reminder automation</strong>
-              <span>Send SMS or email confirmations before scheduled appointments.</span>
-            </div>
-            <div class="side-item">
-              <strong>Deposit collection</strong>
-              <span>Collect Stripe deposits before reserving high-demand time slots.</span>
-            </div>
-          </div>
+        <article class="ops-card">
+          <i class="fa-solid fa-clock" aria-hidden="true"></i>
+          <h3>Reminder logic</h3>
+          <p>Connect email or SMS reminders to confirmation status, deposits, and no-show risk.</p>
+        </article>
+        <article class="ops-card">
+          <i class="fa-solid fa-user-check" aria-hidden="true"></i>
+          <h3>Staff capacity</h3>
+          <p>Protect schedules by showing when team availability, service length, and blocked release windows collide.</p>
         </article>
       </section>
 
@@ -242,27 +368,76 @@
     </div>
 
     <script>
-      const dayButtons = document.querySelectorAll("[data-day]");
-      const scheduleCards = document.querySelectorAll("[data-schedule-day]");
-      const bookingCount = document.querySelector("#booking-count");
-      const countByDay = {
-        monday: 18,
-        tuesday: 15,
-        wednesday: 12,
-      };
+      const slotButtons = document.querySelectorAll(".slot-card");
+      const filterButtons = document.querySelectorAll("[data-slot-filter]");
+      const openSlotCount = document.querySelector("#open-slot-count");
+      const selectedDeposit = document.querySelector("#selected-deposit");
+      const selectedTime = document.querySelector("#selected-time");
+      const selectedStaff = document.querySelector("#selected-staff");
+      const selectedRoom = document.querySelector("#selected-room");
+      const selectedStatus = document.querySelector("#selected-status");
+      const serviceSelect = document.querySelector("#service-select");
+      const serviceDuration = document.querySelector("#service-duration");
+      const servicePrice = document.querySelector("#service-price");
+      const reserveButton = document.querySelector("#reserve-button");
+      const reserveState = document.querySelector("#reserve-state");
 
-      dayButtons.forEach((button) => {
+      function selectSlot(slot) {
+        slotButtons.forEach((button) => button.classList.toggle("active", button === slot));
+        selectedTime.textContent = slot.dataset.time;
+        selectedStaff.textContent = slot.dataset.staff;
+        selectedRoom.textContent = slot.dataset.room;
+        selectedStatus.textContent = slot.dataset.status;
+        reserveState.textContent = `${slot.dataset.status} slot selected.`;
+      }
+
+      function refreshSlotFilter(filter) {
+        let openCount = 0;
+        slotButtons.forEach((slot) => {
+          const isVisible = filter === "all" || slot.dataset.slotType === filter;
+          slot.hidden = !isVisible;
+          if (isVisible && slot.dataset.slotType === "open") {
+            openCount += 1;
+          }
+        });
+        openSlotCount.textContent = openCount;
+
+        const selected = document.querySelector(".slot-card.active");
+        if (!selected || selected.hidden) {
+          const firstVisible = Array.from(slotButtons).find((slot) => !slot.hidden);
+          if (firstVisible) {
+            selectSlot(firstVisible);
+          }
+        }
+      }
+
+      function refreshService() {
+        const option = serviceSelect.selectedOptions[0];
+        serviceDuration.textContent = option.dataset.duration;
+        servicePrice.textContent = option.dataset.price;
+        selectedDeposit.textContent = option.dataset.deposit;
+        reserveState.textContent = `${option.textContent} draft booking ready.`;
+      }
+
+      filterButtons.forEach((button) => {
         button.addEventListener("click", () => {
-          const selectedDay = button.dataset.day;
-          dayButtons.forEach((item) => item.classList.toggle("active", item === button));
-
-          scheduleCards.forEach((card) => {
-            card.hidden = card.dataset.scheduleDay !== selectedDay;
-          });
-
-          bookingCount.textContent = countByDay[selectedDay];
+          filterButtons.forEach((item) => item.classList.toggle("active", item === button));
+          refreshSlotFilter(button.dataset.slotFilter);
         });
       });
+
+      slotButtons.forEach((slot) => {
+        slot.addEventListener("click", () => selectSlot(slot));
+      });
+
+      serviceSelect.addEventListener("change", refreshService);
+
+      reserveButton.addEventListener("click", () => {
+        reserveState.textContent = `${serviceSelect.value} reserved for ${selectedTime.textContent}.`;
+      });
+
+      refreshSlotFilter("all");
+      refreshService();
     </script>
   </body>
 </html>

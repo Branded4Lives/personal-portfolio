@@ -456,88 +456,170 @@ body {
 }
 
 .demo-preview {
+  position: relative;
   display: grid;
-  min-height: 230px;
+  min-height: 250px;
   gap: 14px;
   padding: 18px;
+  overflow: hidden;
   border-bottom: 1px solid rgba(248, 248, 248, 0.12);
-  background:
-    linear-gradient(135deg, rgba(32, 199, 179, 0.14), rgba(241, 166, 79, 0.08)),
-    #111315;
+  background: #111315;
   text-decoration: none;
 }
 
-.inventory-preview {
+.lead-preview {
   background:
-    linear-gradient(135deg, rgba(241, 166, 79, 0.14), rgba(32, 199, 179, 0.08)),
+    linear-gradient(135deg, rgba(32, 199, 179, 0.16), rgba(241, 166, 79, 0.1)),
+    #111315;
+}
+
+.inventory-preview {
+  grid-template-columns: 1fr 0.78fr;
+  background:
+    linear-gradient(135deg, rgba(241, 166, 79, 0.18), rgba(134, 239, 172, 0.1)),
     #111315;
 }
 
 .scheduler-preview {
   background:
-    linear-gradient(135deg, rgba(125, 211, 252, 0.15), rgba(32, 199, 179, 0.08)),
+    linear-gradient(135deg, rgba(125, 211, 252, 0.17), rgba(241, 166, 79, 0.1)),
     #111315;
 }
 
-.preview-toolbar,
-.preview-kpis,
-.preview-table,
-.preview-schedule {
+.preview-pipeline,
+.preview-week {
   display: grid;
-  gap: 8px;
+  gap: 9px;
 }
 
-.preview-toolbar {
-  grid-template-columns: 1fr 52px 52px;
+.preview-pipeline {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
 }
 
-.preview-kpis {
-  grid-template-columns: repeat(3, 1fr);
+.preview-column,
+.preview-week div,
+.preview-inspector,
+.preview-po,
+.preview-booking {
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.05);
 }
 
-.preview-bars,
-.preview-table,
-.preview-schedule {
+.preview-column {
+  display: grid;
   align-content: start;
+  gap: 7px;
+  min-height: 160px;
+  padding: 9px;
 }
 
-.preview-toolbar span,
-.preview-kpis span,
-.preview-table span,
-.preview-schedule span {
+.preview-column strong,
+.preview-week strong,
+.preview-inspector span,
+.preview-po span,
+.preview-booking span {
+  color: #c9d1dc;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 10px;
+  line-height: 1.2;
+}
+
+.preview-column span {
   display: block;
+  min-height: 32px;
   border-radius: 6px;
-  background: rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.11);
 }
 
-.preview-toolbar span {
-  height: 30px;
+.preview-column:nth-child(2) span:first-of-type,
+.preview-column:nth-child(3) span:first-of-type {
+  background: rgba(32, 199, 179, 0.24);
 }
 
-.preview-kpis span {
-  height: 54px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-.preview-bars {
+.preview-inspector,
+.preview-po,
+.preview-booking {
   display: grid;
-  gap: 8px;
+  gap: 7px;
+  align-content: center;
+  min-height: 58px;
+  padding: 12px;
 }
 
-.preview-bars span {
+.preview-inspector strong,
+.preview-po strong,
+.preview-booking strong {
+  color: #ffffff;
+  font-family: "Raleway", sans-serif;
+  font-size: 16px;
+  line-height: 1;
+}
+
+.preview-po em {
+  color: var(--accent-soft);
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 11px;
+  font-style: normal;
+}
+
+.preview-warehouse {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 9px;
+  align-content: center;
+}
+
+.preview-warehouse span {
   display: block;
-  height: 13px;
+  min-height: 42px;
+  border-radius: 7px;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+}
+
+.preview-warehouse .ok {
+  background: rgba(134, 239, 172, 0.2);
+}
+
+.preview-warehouse .watch {
+  background: rgba(241, 166, 79, 0.25);
+}
+
+.preview-warehouse .critical {
+  background: rgba(251, 113, 133, 0.25);
+}
+
+.preview-po {
+  align-self: center;
+  min-height: 138px;
+}
+
+.preview-week {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+
+.preview-week div {
+  display: grid;
+  align-content: start;
+  gap: 7px;
+  min-height: 170px;
+  padding: 9px;
+}
+
+.preview-week span {
+  display: block;
+  min-height: 42px;
   border-radius: 6px;
-  background: linear-gradient(90deg, var(--accent), var(--accent-warm));
+  background: rgba(125, 211, 252, 0.18);
 }
 
-.preview-table span,
-.preview-schedule span {
-  height: 15px;
+.preview-week div:nth-child(2) span,
+.preview-week div:nth-child(4) span {
+  background: rgba(241, 166, 79, 0.2);
 }
 
-.preview-schedule span {
-  height: 30px;
+.preview-booking {
+  min-height: 54px;
 }
 
 .demo-project-copy {
@@ -746,6 +828,59 @@ body {
 
   .contact-section h2 {
     font-size: 30px;
+  }
+}
+
+@media (max-width: 600px) {
+  .site-header,
+  .main {
+    width: calc(100% - 24px);
+  }
+
+  .navbar {
+    padding: 18px;
+  }
+
+  .hero-title {
+    font-size: 36px;
+    line-height: 1.05;
+  }
+
+  .section-heading h2 {
+    font-size: 31px;
+    line-height: 1.08;
+  }
+
+  .cta {
+    width: 100%;
+    padding: 18px 16px;
+  }
+
+  .demo-preview {
+    min-height: 220px;
+  }
+
+  .inventory-preview {
+    grid-template-columns: 1fr;
+  }
+
+  .preview-pipeline,
+  .preview-week {
+    gap: 7px;
+  }
+
+  .preview-column,
+  .preview-week div {
+    padding: 7px;
+  }
+
+  .preview-week strong,
+  .preview-column strong {
+    font-size: 9px;
+  }
+
+  .contact-section h2 {
+    font-size: 28px;
   }
 }
 

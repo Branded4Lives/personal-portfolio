@@ -211,52 +211,56 @@
         <!-- ============ Project Demos Section ============ -->
         <section class="project-demos" id="project-demos">
           <div class="section-heading">
-            <p class="section-kicker">Business-ready demos</p>
-            <h2>Three more systems clients can imagine using</h2>
+            <p class="section-kicker">Interactive prototypes</p>
+            <h2>Three demos that show different client problems</h2>
           </div>
 
           <div class="demo-project-grid">
             <article class="demo-project-card">
               <a
-                class="demo-preview"
+                class="demo-preview lead-preview"
                 href="projects/leadflow-crm/"
                 aria-label="Open LeadFlow CRM demo"
               >
-                <div class="preview-toolbar">
-                  <span></span>
-                  <span></span>
-                  <span></span>
+                <div class="preview-pipeline" aria-hidden="true">
+                  <div class="preview-column">
+                    <strong>New</strong>
+                    <span></span>
+                    <span></span>
+                  </div>
+                  <div class="preview-column">
+                    <strong>Qualified</strong>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                  </div>
+                  <div class="preview-column">
+                    <strong>Proposal</strong>
+                    <span></span>
+                    <span></span>
+                  </div>
+                  <div class="preview-column">
+                    <strong>Won</strong>
+                    <span></span>
+                  </div>
                 </div>
-                <div class="preview-kpis">
-                  <span></span>
-                  <span></span>
-                  <span></span>
-                </div>
-                <div class="preview-bars">
-                  <span style="width: 82%"></span>
-                  <span style="width: 64%"></span>
-                  <span style="width: 46%"></span>
-                </div>
-                <div class="preview-table">
-                  <span></span>
-                  <span></span>
-                  <span></span>
-                  <span></span>
+                <div class="preview-inspector" aria-hidden="true">
+                  <span>$67k pipeline</span>
+                  <strong>Deal inspector</strong>
                 </div>
               </a>
 
               <div class="demo-project-copy">
-                <p class="project-type">CRM and sales operations</p>
+                <p class="project-type">CRM and sales workflow</p>
                 <h3>LeadFlow CRM</h3>
                 <p>
-                  A lead pipeline dashboard for tracking prospects, deal value,
-                  status, owners, and next actions before revenue slips through
-                  the cracks.
+                  A clickable pipeline board with stage filters, live forecast
+                  totals, deal inspection, and follow-up logic for sales teams.
                 </p>
                 <div class="project-tags">
-                  <span>CRM</span>
-                  <span>Dashboard</span>
-                  <span>Filtering UI</span>
+                  <span>Kanban UI</span>
+                  <span>Stateful JS</span>
+                  <span>Deal Modeling</span>
                 </div>
                 <a class="project-link" href="projects/leadflow-crm/">
                   Open live demo <span aria-hidden="true">&gt;</span>
@@ -270,26 +274,24 @@
                 href="projects/stockpilot-inventory/"
                 aria-label="Open StockPilot inventory demo"
               >
-                <div class="preview-toolbar">
-                  <span></span>
-                  <span></span>
-                  <span></span>
+                <div class="preview-warehouse" aria-hidden="true">
+                  <span class="ok"></span>
+                  <span class="ok"></span>
+                  <span class="watch"></span>
+                  <span class="critical"></span>
+                  <span class="ok"></span>
+                  <span class="watch"></span>
+                  <span class="ok"></span>
+                  <span class="critical"></span>
+                  <span class="ok"></span>
+                  <span class="ok"></span>
+                  <span class="watch"></span>
+                  <span class="ok"></span>
                 </div>
-                <div class="preview-kpis">
-                  <span></span>
-                  <span></span>
-                  <span></span>
-                </div>
-                <div class="preview-bars">
-                  <span style="width: 91%"></span>
-                  <span style="width: 74%"></span>
-                  <span style="width: 38%"></span>
-                </div>
-                <div class="preview-table">
-                  <span></span>
-                  <span></span>
-                  <span></span>
-                  <span></span>
+                <div class="preview-po" aria-hidden="true">
+                  <span>Draft PO</span>
+                  <strong>$3,670</strong>
+                  <em>4 reorder lines</em>
                 </div>
               </a>
 
@@ -297,14 +299,14 @@
                 <p class="project-type">Inventory and purchasing</p>
                 <h3>StockPilot</h3>
                 <p>
-                  An operations dashboard for stock health, reorder risk,
-                  supplier timing, purchasing priorities, and fast-moving
-                  product categories.
+                  A stock-risk control center with category filters, supplier
+                  timing, SKU runout signals, and a working purchase-order
+                  builder.
                 </p>
                 <div class="project-tags">
-                  <span>Inventory</span>
+                  <span>PO Builder</span>
+                  <span>Inventory Logic</span>
                   <span>Data Tables</span>
-                  <span>Operations</span>
                 </div>
                 <a class="project-link" href="projects/stockpilot-inventory/">
                   Open live demo <span aria-hidden="true">&gt;</span>
@@ -318,25 +320,16 @@
                 href="projects/booksmart-scheduler/"
                 aria-label="Open BookSmart scheduler demo"
               >
-                <div class="preview-toolbar">
-                  <span></span>
-                  <span></span>
-                  <span></span>
+                <div class="preview-week" aria-hidden="true">
+                  <div><strong>Mon</strong><span></span><span></span></div>
+                  <div><strong>Tue</strong><span></span></div>
+                  <div><strong>Wed</strong><span></span><span></span></div>
+                  <div><strong>Thu</strong><span></span></div>
+                  <div><strong>Fri</strong><span></span></div>
                 </div>
-                <div class="preview-kpis">
-                  <span></span>
-                  <span></span>
-                  <span></span>
-                </div>
-                <div class="preview-schedule">
-                  <span></span>
-                  <span></span>
-                  <span></span>
-                </div>
-                <div class="preview-table">
-                  <span></span>
-                  <span></span>
-                  <span></span>
+                <div class="preview-booking" aria-hidden="true">
+                  <span>Selected slot</span>
+                  <strong>Mon 8:30 AM</strong>
                 </div>
               </a>
 
@@ -344,14 +337,13 @@
                 <p class="project-type">Scheduling and dispatch</p>
                 <h3>BookSmart</h3>
                 <p>
-                  A booking console for appointment flow, daily capacity,
-                  intake queues, reminders, staff workload, and service
-                  operations.
+                  A calendar-style booking console with selectable slots,
+                  service pricing, waitlist filters, and reservation state.
                 </p>
                 <div class="project-tags">
-                  <span>Scheduling</span>
-                  <span>Service Ops</span>
-                  <span>Interactive UI</span>
+                  <span>Calendar UI</span>
+                  <span>Booking Flow</span>
+                  <span>Live Selection</span>
                 </div>
                 <a class="project-link" href="projects/booksmart-scheduler/">
                   Open live demo <span aria-hidden="true">&gt;</span>
