@@ -34,27 +34,51 @@ body.crm-demo {
   --accent: #2dd4bf;
   --accent-2: #f5b45b;
   --accent-3: #7dd3fc;
+  --line: rgba(45, 212, 191, 0.18);
   background:
-    linear-gradient(180deg, rgba(45, 212, 191, 0.1), transparent 340px),
-    linear-gradient(135deg, #101112 0%, #191a1f 52%, #111315 100%);
+    repeating-linear-gradient(
+      90deg,
+      rgba(45, 212, 191, 0.05) 0 1px,
+      transparent 1px 54px
+    ),
+    repeating-linear-gradient(
+      0deg,
+      rgba(45, 212, 191, 0.04) 0 1px,
+      transparent 1px 54px
+    ),
+    linear-gradient(135deg, #071111 0%, #141820 52%, #101112 100%);
 }
 
 body.inventory-demo {
   --accent: #f5b45b;
   --accent-2: #86efac;
   --accent-3: #fb7185;
+  --line: rgba(245, 180, 91, 0.24);
   background:
-    linear-gradient(180deg, rgba(245, 180, 91, 0.12), transparent 340px),
-    linear-gradient(135deg, #11120f 0%, #1a1b16 52%, #111315 100%);
+    repeating-linear-gradient(
+      135deg,
+      rgba(245, 180, 91, 0.08) 0 10px,
+      transparent 10px 26px
+    ),
+    linear-gradient(135deg, #1d170c 0%, #121711 52%, #101112 100%);
 }
 
 body.scheduler-demo {
   --accent: #7dd3fc;
   --accent-2: #f5b45b;
   --accent-3: #2dd4bf;
+  --bg: #f3fbff;
+  --text: #10202a;
+  --muted: #536474;
+  --line: rgba(16, 66, 88, 0.18);
+  --success: #127548;
   background:
-    linear-gradient(180deg, rgba(125, 211, 252, 0.1), transparent 340px),
-    linear-gradient(135deg, #111213 0%, #181714 52%, #101315 100%);
+    repeating-linear-gradient(
+      0deg,
+      rgba(19, 108, 143, 0.08) 0 1px,
+      transparent 1px 36px
+    ),
+    linear-gradient(135deg, #f3fbff 0%, #fff8e7 54%, #edf8f0 100%);
 }
 
 button,
@@ -174,6 +198,75 @@ p {
   border-radius: 8px;
   background: linear-gradient(135deg, rgba(32, 36, 42, 0.93), rgba(20, 23, 27, 0.95));
   box-shadow: var(--shadow);
+}
+
+.crm-demo .demo-nav,
+.crm-demo .hero-copy,
+.crm-demo .hero-aside,
+.crm-demo .panel,
+.crm-demo .metric-card,
+.crm-demo .automation-card {
+  border-color: rgba(45, 212, 191, 0.2);
+  background:
+    repeating-linear-gradient(
+      90deg,
+      rgba(45, 212, 191, 0.045) 0 1px,
+      transparent 1px 44px
+    ),
+    linear-gradient(135deg, rgba(7, 24, 24, 0.96), rgba(15, 19, 27, 0.98));
+}
+
+.inventory-demo .demo-nav,
+.inventory-demo .hero-copy,
+.inventory-demo .hero-aside,
+.inventory-demo .panel,
+.inventory-demo .metric-card,
+.inventory-demo .supplier-card {
+  border-color: rgba(245, 180, 91, 0.28);
+  background:
+    linear-gradient(180deg, rgba(255, 221, 133, 0.035), transparent),
+    linear-gradient(135deg, rgba(45, 34, 15, 0.97), rgba(18, 24, 17, 0.98));
+  box-shadow: 0 24px 70px rgba(21, 16, 7, 0.34);
+}
+
+.scheduler-demo .demo-nav,
+.scheduler-demo .hero-copy,
+.scheduler-demo .hero-aside,
+.scheduler-demo .panel,
+.scheduler-demo .metric-card,
+.scheduler-demo .ops-card {
+  border-color: rgba(16, 66, 88, 0.18);
+  background: rgba(255, 255, 255, 0.84);
+  box-shadow: 0 18px 48px rgba(35, 65, 82, 0.14);
+}
+
+.scheduler-demo .demo-nav {
+  background: rgba(255, 255, 255, 0.92);
+}
+
+.scheduler-demo .ghost-link,
+.scheduler-demo .select-control,
+.scheduler-demo .segmented button {
+  background: rgba(255, 255, 255, 0.82);
+  color: #284453;
+}
+
+.scheduler-demo .slot-card,
+.scheduler-demo .selected-slot,
+.scheduler-demo .service-summary {
+  border-color: rgba(16, 66, 88, 0.16);
+  background: rgba(255, 255, 255, 0.84);
+  color: var(--text);
+}
+
+.scheduler-demo .day-column {
+  border-color: rgba(16, 66, 88, 0.14);
+  background: rgba(241, 249, 253, 0.72);
+}
+
+.scheduler-demo .metric-card small,
+.scheduler-demo .reserve-state {
+  color: #127548;
 }
 
 .hero-copy {
@@ -813,6 +906,13 @@ td {
 .slot-card.active {
   border-color: color-mix(in srgb, var(--accent) 58%, transparent);
   background: color-mix(in srgb, var(--accent) 10%, rgba(17, 21, 26, 0.9));
+}
+
+.scheduler-demo .slot-card:hover,
+.scheduler-demo .slot-card.active {
+  border-color: rgba(13, 118, 155, 0.42);
+  background: #e8f8ff;
+  color: var(--text);
 }
 
 .slot-time {
