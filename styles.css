@@ -515,9 +515,9 @@ body {
 }
 
 .booking-card {
-  border-color: rgba(0, 108, 228, 0.55);
-  background: #ffffff;
-  color: #1a1a1a;
+  border-color: rgba(106, 126, 85, 0.58);
+  background: #f1eee3;
+  color: #10231f;
 }
 
 .demo-preview {
@@ -561,11 +561,21 @@ body {
 }
 
 .booking-preview {
-  grid-template-rows: minmax(96px, 1fr) auto auto;
+  grid-template-columns: minmax(0, 1fr) 94px;
+  grid-template-rows: minmax(0, 1fr) auto;
   gap: 10px;
   background:
-    linear-gradient(90deg, rgba(0, 34, 79, 0.78), rgba(0, 34, 79, 0.22)),
-    url("images/booksmart-stays-hero.jpg") center / cover;
+    repeating-linear-gradient(
+      0deg,
+      rgba(255, 255, 255, 0.08) 0 1px,
+      transparent 1px 26px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.07) 0 1px,
+      transparent 1px 28px
+    ),
+    linear-gradient(135deg, #10231f 0%, #3f543a 58%, #b86046 100%);
 }
 
 .preview-pipeline,
@@ -762,108 +772,155 @@ body {
 }
 
 .booking-card .demo-project-copy {
-  border-top: 1px solid rgba(0, 108, 228, 0.16);
-  background: #ffffff;
+  border-top: 1px solid rgba(55, 74, 52, 0.2);
+  background:
+    linear-gradient(180deg, rgba(249, 244, 232, 0.96), rgba(241, 230, 207, 0.96));
 }
 
 .booking-card .project-type,
 .booking-card .demo-project-copy h3,
 .booking-card .demo-project-copy p:not(.project-type),
 .booking-card .project-link {
-  color: #1a1a1a;
+  color: #10231f;
 }
 
 .booking-card .project-type {
-  color: #006ce4;
+  color: #9a4f39;
 }
 
 .booking-card .project-tags span {
-  border-color: rgba(0, 108, 228, 0.2);
-  background: #eaf4ff;
-  color: #003b95;
+  border-color: rgba(73, 95, 68, 0.28);
+  background: rgba(255, 255, 255, 0.5);
+  color: #33462f;
 }
 
-.preview-booking-hero {
-  display: grid;
-  align-content: end;
-  gap: 6px;
-  color: #ffffff;
+.preview-atlas-map {
+  position: relative;
+  grid-row: 1 / span 2;
+  min-height: 214px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 8px;
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.1), transparent 58%),
+    linear-gradient(160deg, rgba(21, 48, 42, 0.92), rgba(98, 116, 74, 0.72));
 }
 
-.preview-booking-hero span {
+.preview-atlas-map::before {
+  position: absolute;
+  inset: 18px 20px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 7px;
+  content: "";
+}
+
+.preview-map-label {
+  position: absolute;
+  left: 16px;
+  top: 16px;
+  color: #ffe8b6;
   font-family: "IBM Plex Mono", monospace;
-  font-size: 11px;
+  font-size: 10px;
   text-transform: uppercase;
 }
 
-.preview-booking-hero strong {
-  max-width: 220px;
-  font-family: "Raleway", sans-serif;
-  font-size: 24px;
-  line-height: 1.05;
+.preview-route-line {
+  position: absolute;
+  left: 42px;
+  top: 116px;
+  width: 118px;
+  height: 2px;
+  background: #f0b35b;
+  transform: rotate(-23deg);
+  transform-origin: left center;
 }
 
-.preview-search-row {
+.preview-node {
+  position: absolute;
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) 72px;
-  gap: 4px;
-  border: 3px solid #febb02;
-  border-radius: 7px;
-  background: #febb02;
+  width: 33px;
+  height: 33px;
+  place-items: center;
+  border: 2px solid rgba(255, 255, 255, 0.9);
+  border-radius: 50%;
+  background: #c96047;
+  color: #ffffff;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 11px;
+  font-style: normal;
 }
 
-.preview-search-row span,
-.preview-search-row strong {
-  min-height: 38px;
-  padding: 11px 9px;
-  background: #ffffff;
-  color: #1a1a1a;
+.node-lake {
+  left: 38px;
+  top: 128px;
+}
+
+.node-town {
+  left: 110px;
+  top: 80px;
+  background: #e0a84e;
+}
+
+.node-trail {
+  right: 34px;
+  bottom: 36px;
+  background: #5b8f7b;
+}
+
+.preview-atlas-stack {
+  display: grid;
+  gap: 8px;
+}
+
+.preview-atlas-photo {
+  min-height: 52px;
+  border: 2px solid rgba(255, 255, 255, 0.72);
+  border-radius: 6px;
+  background-size: cover;
+  background-position: center;
+  box-shadow: 0 12px 20px rgba(12, 20, 18, 0.24);
+}
+
+.photo-lake {
+  background-image: url("images/booksmart-stays-hero.jpg");
+}
+
+.photo-city {
+  background-image: url("images/booksmart-city-hotel.jpg");
+}
+
+.photo-cabin {
+  background-image: url("images/booksmart-trail-cabin.jpg");
+}
+
+.preview-atlas-panel {
+  display: grid;
+  grid-column: 2;
+  gap: 4px;
+  border: 1px solid rgba(255, 232, 182, 0.42);
+  border-radius: 8px;
+  padding: 11px;
+  background: rgba(255, 248, 231, 0.92);
+  color: #10231f;
+}
+
+.preview-atlas-panel span,
+.preview-atlas-panel em {
   font-family: "IBM Plex Mono", monospace;
   font-size: 10px;
-  line-height: 1.1;
+  font-style: normal;
+  line-height: 1.2;
 }
 
-.preview-search-row strong {
-  display: grid;
-  place-items: center;
-  border-radius: 3px;
-  background: #006ce4;
-  color: #ffffff;
-}
-
-.preview-stay-row {
-  display: grid;
-  grid-template-columns: 58px minmax(0, 1fr);
-  gap: 10px;
-  border-radius: 7px;
-  padding: 9px;
-  background: #ffffff;
-}
-
-.preview-stay-row > span {
-  min-height: 46px;
-  border-radius: 5px;
-  background: url("images/booksmart-stays-hero.jpg") center / cover;
-}
-
-.preview-stay-row div {
-  display: grid;
-  gap: 4px;
-  align-content: center;
-}
-
-.preview-stay-row strong {
-  color: #006ce4;
+.preview-atlas-panel strong {
+  color: #10231f;
   font-family: "Raleway", sans-serif;
   font-size: 14px;
   line-height: 1.05;
 }
 
-.preview-stay-row em {
-  color: #1a1a1a;
-  font-family: "IBM Plex Mono", monospace;
-  font-size: 10px;
-  font-style: normal;
+.preview-atlas-panel em {
+  color: #9a4f39;
 }
 
 .demo-project-copy {

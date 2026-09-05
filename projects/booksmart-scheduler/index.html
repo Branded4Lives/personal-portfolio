@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>BookSmart Stays Demo</title>
+    <title>BookSmart Atlas Demo</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -17,172 +17,210 @@
     <link rel="stylesheet" href="../assets/demo.css" />
   </head>
 
-  <body class="booking-demo">
-    <header class="booking-topbar">
-      <div class="booking-shell">
-        <nav class="booking-nav" aria-label="BookSmart navigation">
-          <a class="booking-logo" href="../../">
-            <i class="fa-solid fa-bed" aria-hidden="true"></i>
-            BookSmart
+  <body class="atlas-demo">
+    <header class="atlas-header">
+      <div class="atlas-shell atlas-nav">
+        <a class="atlas-brand" href="../../">
+          <span><i class="fa-solid fa-compass" aria-hidden="true"></i></span>
+          <strong>BookSmart</strong>
+          <small>Atlas</small>
+        </a>
+
+        <div class="atlas-nav-actions">
+          <span>Travel Ops Prototype</span>
+          <a class="atlas-link" href="../../#project-demos">
+            <i class="fa-solid fa-arrow-left" aria-hidden="true"></i>
+            Portfolio
           </a>
-
-          <div class="booking-actions">
-            <span>USD</span>
-            <button type="button" aria-label="Help">
-              <i class="fa-regular fa-circle-question" aria-hidden="true"></i>
-            </button>
-            <a href="mailto:bmcgahuey@gmail.com">List your stay</a>
-            <a class="booking-outline" href="../../#project-demos">Portfolio</a>
-            <a class="booking-solid" href="mailto:bmcgahuey@gmail.com">Request a build</a>
-          </div>
-        </nav>
-
-        <div class="booking-tabs" aria-label="Travel product sections">
-          <button class="active" type="button" data-travel-tab="Stays">
-            <i class="fa-solid fa-bed" aria-hidden="true"></i>
-            Stays
-          </button>
-          <button type="button" data-travel-tab="Flights">
-            <i class="fa-solid fa-plane" aria-hidden="true"></i>
-            Flights
-          </button>
-          <button type="button" data-travel-tab="Packages">
-            <i class="fa-solid fa-suitcase-rolling" aria-hidden="true"></i>
-            Packages
-          </button>
-          <button type="button" data-travel-tab="Cars">
-            <i class="fa-solid fa-car" aria-hidden="true"></i>
-            Cars
-          </button>
-          <button type="button" data-travel-tab="Experiences">
-            <i class="fa-solid fa-map-location-dot" aria-hidden="true"></i>
-            Experiences
-          </button>
+          <a class="atlas-cta" href="mailto:bmcgahuey@gmail.com">
+            <i class="fa-solid fa-paper-plane" aria-hidden="true"></i>
+            Request a build
+          </a>
         </div>
       </div>
     </header>
 
     <main>
-      <section class="booking-hero">
-        <img
-          src="../../images/booksmart-stays-hero.jpg"
-          alt="Travelers arriving at a lakeside vacation lodge"
-        />
-        <div class="booking-hero-copy">
-          <p>Weekend stays with smart availability rules</p>
-          <h1>Book a better getaway without the tab chaos.</h1>
-          <span>Search lodging, compare stays, track guests, and build a checkout-ready trip summary.</span>
+      <section class="atlas-shell atlas-hero">
+        <div class="atlas-hero-copy">
+          <p class="atlas-kicker">Stay planning engine</p>
+          <h1>Build the right trip from the stays that actually fit.</h1>
+          <span>
+            Compare lodging by guest needs, trip friction, stay quality, and
+            checkout impact in one working flow.
+          </span>
+
+          <div class="travel-modes" aria-label="Trip modes">
+            <button class="active" type="button" data-travel-tab="Stays">
+              <i class="fa-solid fa-house-chimney-window" aria-hidden="true"></i>
+              Stays
+            </button>
+            <button type="button" data-travel-tab="Work trips">
+              <i class="fa-solid fa-briefcase" aria-hidden="true"></i>
+              Work trips
+            </button>
+            <button type="button" data-travel-tab="Families">
+              <i class="fa-solid fa-people-roof" aria-hidden="true"></i>
+              Families
+            </button>
+            <button type="button" data-travel-tab="Outdoors">
+              <i class="fa-solid fa-route" aria-hidden="true"></i>
+              Outdoors
+            </button>
+          </div>
         </div>
+
+        <aside class="atlas-board" aria-label="Lake Tahoe stay map">
+          <img
+            src="../../images/booksmart-stays-hero.jpg"
+            alt="Travelers arriving at a lakeside lodge"
+          />
+          <div class="map-grid" aria-hidden="true"></div>
+          <div class="map-pin pin-lake">
+            <span>01</span>
+            <strong>Lakefront</strong>
+          </div>
+          <div class="map-pin pin-town">
+            <span>02</span>
+            <strong>Town base</strong>
+          </div>
+          <div class="map-pin pin-trail">
+            <span>03</span>
+            <strong>Trail cabin</strong>
+          </div>
+          <div class="route-note">
+            <span>Drive window</span>
+            <strong>3h 20m</strong>
+          </div>
+        </aside>
       </section>
 
-      <section class="booking-shell booking-search-wrap" aria-label="Stay search">
-        <form class="booking-search" id="booking-search">
-          <label class="booking-field destination-field">
+      <section class="atlas-shell atlas-search-wrap" aria-label="Trip search">
+        <form class="atlas-search" id="booking-search">
+          <label class="atlas-field destination-field">
             <span>Destination</span>
-            <i class="fa-solid fa-location-dot" aria-hidden="true"></i>
+            <i class="fa-solid fa-location-crosshairs" aria-hidden="true"></i>
             <input id="destination-input" value="Lake Tahoe" aria-label="Destination" />
           </label>
 
-          <label class="booking-field">
-            <span>Check-in</span>
+          <label class="atlas-field">
+            <span>Arrive</span>
             <i class="fa-regular fa-calendar" aria-hidden="true"></i>
-            <input id="checkin-input" type="date" value="2026-09-18" aria-label="Check-in date" />
+            <input id="checkin-input" type="date" value="2026-09-18" aria-label="Arrival date" />
           </label>
 
-          <label class="booking-field">
-            <span>Check-out</span>
+          <label class="atlas-field">
+            <span>Leave</span>
             <i class="fa-regular fa-calendar-check" aria-hidden="true"></i>
-            <input id="checkout-input" type="date" value="2026-09-21" aria-label="Check-out date" />
+            <input id="checkout-input" type="date" value="2026-09-21" aria-label="Departure date" />
           </label>
 
-          <div class="booking-field guest-field">
-            <span>Guests</span>
+          <div class="atlas-field guest-field">
+            <span>Travelers</span>
             <i class="fa-regular fa-user" aria-hidden="true"></i>
             <strong id="guest-label">2 adults, 1 room</strong>
-            <div class="guest-stepper" aria-label="Guest controls">
-              <button type="button" id="remove-guest" aria-label="Remove guest">
+            <div class="guest-stepper" aria-label="Traveler controls">
+              <button type="button" id="remove-guest" aria-label="Remove traveler">
                 <i class="fa-solid fa-minus" aria-hidden="true"></i>
               </button>
-              <button type="button" id="add-guest" aria-label="Add guest">
+              <button type="button" id="add-guest" aria-label="Add traveler">
                 <i class="fa-solid fa-plus" aria-hidden="true"></i>
               </button>
             </div>
           </div>
 
-          <button class="booking-submit" type="submit">
-            <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
-            Search
+          <button class="atlas-submit" type="submit">
+            <i class="fa-solid fa-wand-magic-sparkles" aria-hidden="true"></i>
+            Rebuild matches
           </button>
         </form>
 
-        <div class="booking-checks" aria-label="Search options">
-          <label><input type="checkbox" /> I'm traveling for work</label>
-          <label><input type="checkbox" checked /> Show flexible cancellation</label>
-          <label><input type="checkbox" /> Add flights to my search</label>
+        <div class="atlas-switches" aria-label="Trip options">
+          <label><input type="checkbox" /> Work-friendly stays</label>
+          <label><input type="checkbox" checked /> Flexible cancellation</label>
+          <label><input type="checkbox" /> Bundle transit notes</label>
         </div>
       </section>
 
-      <section class="booking-shell booking-content">
-        <aside class="booking-filter-panel">
+      <section class="atlas-shell atlas-workspace">
+        <aside class="atlas-panel planning-panel">
           <div>
-            <p class="booking-kicker">Smart filters</p>
-            <h2>Shape the trip</h2>
+            <p class="atlas-kicker">Trip shape</p>
+            <h2>Fit controls</h2>
           </div>
 
-          <div class="booking-filter-group" aria-label="Stay type filters">
-            <button class="active" type="button" data-stay-filter="all">All stays</button>
-            <button type="button" data-stay-filter="lodge">Lodges</button>
-            <button type="button" data-stay-filter="hotel">Hotels</button>
-            <button type="button" data-stay-filter="family">Family stays</button>
+          <div class="atlas-filter-group" aria-label="Stay type filters">
+            <button class="active" type="button" data-stay-filter="all">
+              <i class="fa-solid fa-layer-group" aria-hidden="true"></i>
+              All stays
+            </button>
+            <button type="button" data-stay-filter="lodge">
+              <i class="fa-solid fa-mountain-sun" aria-hidden="true"></i>
+              Lodges
+            </button>
+            <button type="button" data-stay-filter="hotel">
+              <i class="fa-solid fa-building" aria-hidden="true"></i>
+              Hotels
+            </button>
+            <button type="button" data-stay-filter="family">
+              <i class="fa-solid fa-couch" aria-hidden="true"></i>
+              Family stays
+            </button>
           </div>
 
-          <div class="budget-meter" aria-label="Budget range">
+          <div class="fit-meter" aria-label="Budget balance">
             <div>
-              <span>Nightly budget</span>
+              <span>Nightly comfort zone</span>
               <strong>$180 - $420</strong>
             </div>
-            <div class="budget-track"><span></span></div>
+            <div class="fit-track"><span></span></div>
           </div>
 
-          <div class="trust-list">
+          <div class="planning-list">
             <div>
               <i class="fa-solid fa-shield-heart" aria-hidden="true"></i>
-              <span>Cancellation policy parsed before checkout.</span>
+              <span>Cancellation risk</span>
+              <strong>Low</strong>
             </div>
             <div>
-              <i class="fa-solid fa-receipt" aria-hidden="true"></i>
-              <span>Taxes and stay fees summarized in one place.</span>
+              <i class="fa-solid fa-utensils" aria-hidden="true"></i>
+              <span>Breakfast value</span>
+              <strong>High</strong>
             </div>
             <div>
-              <i class="fa-solid fa-bolt" aria-hidden="true"></i>
-              <span>Selections update the trip summary instantly.</span>
+              <i class="fa-solid fa-car-side" aria-hidden="true"></i>
+              <span>Drive friction</span>
+              <strong>22 min</strong>
             </div>
           </div>
         </aside>
 
-        <section class="booking-results">
+        <section class="atlas-panel atlas-results">
           <div class="results-heading">
             <div>
-              <p class="booking-kicker" id="active-tab-label">Stays search</p>
-              <h2 id="results-title">Lake Tahoe: 4 available stays</h2>
+              <p class="atlas-kicker" id="active-tab-label">Stays brief</p>
+              <h2 id="results-title">Lake Tahoe: 4 fit-ranked stays</h2>
             </div>
             <div class="sort-pill">
-              <i class="fa-solid fa-arrow-down-wide-short" aria-hidden="true"></i>
-              Best match
+              <i class="fa-solid fa-sliders" aria-hidden="true"></i>
+              Fit score
             </div>
           </div>
 
-          <div class="stay-list" id="stay-list">
+          <div class="retreat-grid" id="stay-list">
             <article
-              class="stay-card"
+              class="retreat-card selected"
               data-stay-type="lodge"
               data-name="Pineglass Lake Lodge"
               data-price="329"
               data-rating="9.2"
             >
-              <img src="../../images/booksmart-stays-hero.jpg" alt="Pineglass Lake Lodge" />
-              <div class="stay-copy">
-                <div class="stay-title-row">
+              <div class="retreat-media">
+                <img src="../../images/booksmart-stays-hero.jpg" alt="Pineglass Lake Lodge" />
+                <span class="fit-score">92 fit</span>
+              </div>
+              <div class="retreat-body">
+                <div class="retreat-title-row">
                   <div>
                     <h3>Pineglass Lake Lodge</h3>
                     <span>Lakefront lodge, 0.4 miles from marina</span>
@@ -191,31 +229,35 @@
                     <i class="fa-regular fa-heart" aria-hidden="true"></i>
                   </button>
                 </div>
-                <div class="stay-badges">
+                <p>Quiet waterfront stay with fast access to trails and boat rentals.</p>
+                <div class="retreat-badges">
                   <span>Free cancellation</span>
-                  <span>Breakfast included</span>
+                  <span>Breakfast</span>
                   <span>Lake view</span>
                 </div>
-                <p>Best for travelers who want a quiet waterfront stay with fast access to trails and boat rentals.</p>
-              </div>
-              <div class="stay-price">
-                <span class="rating-pill">9.2 Superb</span>
-                <strong>$329</strong>
-                <small>per night</small>
-                <button class="select-stay" type="button">Select stay</button>
+                <div class="retreat-footer">
+                  <div>
+                    <span>Nightly</span>
+                    <strong>$329</strong>
+                  </div>
+                  <button class="select-stay" type="button">Select</button>
+                </div>
               </div>
             </article>
 
             <article
-              class="stay-card"
+              class="retreat-card"
               data-stay-type="hotel"
               data-name="Northstar City Hotel"
               data-price="214"
               data-rating="8.7"
             >
-              <img src="../../images/booksmart-city-hotel.jpg" alt="Northstar City Hotel" />
-              <div class="stay-copy">
-                <div class="stay-title-row">
+              <div class="retreat-media">
+                <img src="../../images/booksmart-city-hotel.jpg" alt="Northstar City Hotel" />
+                <span class="fit-score">87 fit</span>
+              </div>
+              <div class="retreat-body">
+                <div class="retreat-title-row">
                   <div>
                     <h3>Northstar City Hotel</h3>
                     <span>Downtown stay, walkable restaurants</span>
@@ -224,31 +266,35 @@
                     <i class="fa-regular fa-heart" aria-hidden="true"></i>
                   </button>
                 </div>
-                <div class="stay-badges">
+                <p>Practical city base for work trips, conferences, and location-first guests.</p>
+                <div class="retreat-badges">
                   <span>No prepayment</span>
                   <span>Workspace</span>
                   <span>Parking</span>
                 </div>
-                <p>A practical city base for work trips, conferences, and guests who care about location first.</p>
-              </div>
-              <div class="stay-price">
-                <span class="rating-pill">8.7 Excellent</span>
-                <strong>$214</strong>
-                <small>per night</small>
-                <button class="select-stay" type="button">Select stay</button>
+                <div class="retreat-footer">
+                  <div>
+                    <span>Nightly</span>
+                    <strong>$214</strong>
+                  </div>
+                  <button class="select-stay" type="button">Select</button>
+                </div>
               </div>
             </article>
 
             <article
-              class="stay-card"
+              class="retreat-card"
               data-stay-type="family"
               data-name="Cedar Cove Family Suites"
               data-price="286"
               data-rating="9.0"
             >
-              <img src="../../images/booksmart-family-suite.jpg" alt="Cedar Cove Family Suites" />
-              <div class="stay-copy">
-                <div class="stay-title-row">
+              <div class="retreat-media">
+                <img src="../../images/booksmart-family-suite.jpg" alt="Cedar Cove Family Suites" />
+                <span class="fit-score">90 fit</span>
+              </div>
+              <div class="retreat-body">
+                <div class="retreat-title-row">
                   <div>
                     <h3>Cedar Cove Family Suites</h3>
                     <span>Two-bedroom suites near the beach path</span>
@@ -257,31 +303,35 @@
                     <i class="fa-regular fa-heart" aria-hidden="true"></i>
                   </button>
                 </div>
-                <div class="stay-badges">
+                <p>Roomy weekend base with flexible sleeping options and simple check-in.</p>
+                <div class="retreat-badges">
                   <span>Kitchen</span>
-                  <span>Washer and dryer</span>
+                  <span>Laundry</span>
                   <span>Family rooms</span>
                 </div>
-                <p>Designed for longer weekends where guests need space, flexible sleeping options, and simple check-in.</p>
-              </div>
-              <div class="stay-price">
-                <span class="rating-pill">9.0 Wonderful</span>
-                <strong>$286</strong>
-                <small>per night</small>
-                <button class="select-stay" type="button">Select stay</button>
+                <div class="retreat-footer">
+                  <div>
+                    <span>Nightly</span>
+                    <strong>$286</strong>
+                  </div>
+                  <button class="select-stay" type="button">Select</button>
+                </div>
               </div>
             </article>
 
             <article
-              class="stay-card"
+              class="retreat-card"
               data-stay-type="lodge"
               data-name="Harbor Trail Cabins"
               data-price="178"
               data-rating="8.5"
             >
-              <img src="../../images/booksmart-trail-cabin.jpg" alt="Harbor Trail Cabins" />
-              <div class="stay-copy">
-                <div class="stay-title-row">
+              <div class="retreat-media">
+                <img src="../../images/booksmart-trail-cabin.jpg" alt="Harbor Trail Cabins" />
+                <span class="fit-score">85 fit</span>
+              </div>
+              <div class="retreat-body">
+                <div class="retreat-title-row">
                   <div>
                     <h3>Harbor Trail Cabins</h3>
                     <span>Private cabins beside the trailhead</span>
@@ -290,26 +340,32 @@
                     <i class="fa-regular fa-heart" aria-hidden="true"></i>
                   </button>
                 </div>
-                <div class="stay-badges">
+                <p>Lower-cost outdoor stay with a clean path from search to reservation.</p>
+                <div class="retreat-badges">
                   <span>Pet friendly</span>
                   <span>Fire pit</span>
                   <span>Self check-in</span>
                 </div>
-                <p>A lower-cost option for outdoor weekends with a clean, fast path from search to reservation.</p>
-              </div>
-              <div class="stay-price">
-                <span class="rating-pill">8.5 Very good</span>
-                <strong>$178</strong>
-                <small>per night</small>
-                <button class="select-stay" type="button">Select stay</button>
+                <div class="retreat-footer">
+                  <div>
+                    <span>Nightly</span>
+                    <strong>$178</strong>
+                  </div>
+                  <button class="select-stay" type="button">Select</button>
+                </div>
               </div>
             </article>
           </div>
         </section>
 
-        <aside class="trip-summary" aria-live="polite">
-          <p class="booking-kicker">Trip summary</p>
+        <aside class="atlas-panel trip-ledger" aria-live="polite">
+          <p class="atlas-kicker">Trip brief</p>
           <h2 id="summary-stay">Pineglass Lake Lodge</h2>
+          <div class="ledger-images" aria-hidden="true">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
           <div class="summary-lines">
             <div>
               <span>Destination</span>
@@ -320,11 +376,11 @@
               <strong id="summary-dates">Sep 18 - Sep 21</strong>
             </div>
             <div>
-              <span>Guests</span>
+              <span>Travelers</span>
               <strong id="summary-guests">2 adults</strong>
             </div>
             <div>
-              <span>Rating</span>
+              <span>Score</span>
               <strong id="summary-rating">9.2</strong>
             </div>
           </div>
@@ -332,9 +388,9 @@
             <span id="summary-nights">3 nights</span>
             <strong id="summary-total">$1,115</strong>
           </div>
-          <button class="booking-solid full-width" type="button">
+          <button class="atlas-cta full-width" type="button">
             <i class="fa-solid fa-lock" aria-hidden="true"></i>
-            Continue checkout
+            Hold itinerary
           </button>
         </aside>
       </section>
@@ -352,7 +408,7 @@
       const addGuest = document.querySelector("#add-guest");
       const removeGuest = document.querySelector("#remove-guest");
       const filterButtons = document.querySelectorAll("[data-stay-filter]");
-      const stayCards = document.querySelectorAll(".stay-card");
+      const stayCards = document.querySelectorAll(".retreat-card");
       const resultsTitle = document.querySelector("#results-title");
       const summaryStay = document.querySelector("#summary-stay");
       const summaryDestination = document.querySelector("#summary-destination");
@@ -375,9 +431,11 @@
           month: "short",
           day: "numeric",
         });
+
         if (Number.isNaN(checkin.getTime()) || Number.isNaN(checkout.getTime())) {
           return { label: "Select dates", nights: 1 };
         }
+
         const msPerNight = 1000 * 60 * 60 * 24;
         const nights = Math.max(1, Math.round((checkout - checkin) / msPerNight));
         return {
@@ -402,7 +460,7 @@
       function updateResultsTitle() {
         const visibleCount = Array.from(stayCards).filter((card) => !card.hidden).length;
         const destination = destinationInput.value.trim() || "Anywhere";
-        resultsTitle.textContent = `${destination}: ${visibleCount} available ${visibleCount === 1 ? "stay" : "stays"}`;
+        resultsTitle.textContent = `${destination}: ${visibleCount} fit-ranked ${visibleCount === 1 ? "stay" : "stays"}`;
         summaryDestination.textContent = destination;
       }
 
@@ -417,7 +475,7 @@
       travelTabs.forEach((button) => {
         button.addEventListener("click", () => {
           travelTabs.forEach((tab) => tab.classList.toggle("active", tab === button));
-          activeTabLabel.textContent = `${button.dataset.travelTab} search`;
+          activeTabLabel.textContent = `${button.dataset.travelTab} brief`;
         });
       });
 
@@ -438,6 +496,7 @@
           stayCards.forEach((card) => {
             card.hidden = filter !== "all" && card.dataset.stayType !== filter;
           });
+
           const firstVisible = Array.from(stayCards).find((card) => !card.hidden);
           if (firstVisible) {
             selectStay(firstVisible);
@@ -448,7 +507,7 @@
 
       document.querySelectorAll(".select-stay").forEach((button) => {
         button.addEventListener("click", () => {
-          selectStay(button.closest(".stay-card"));
+          selectStay(button.closest(".retreat-card"));
         });
       });
 
@@ -471,7 +530,7 @@
       checkoutInput.addEventListener("change", updateTripMath);
       destinationInput.addEventListener("input", updateResultsTitle);
 
-      selectStay(document.querySelector(".stay-card"));
+      selectStay(document.querySelector(".retreat-card"));
       updateGuests();
       updateResultsTitle();
       updateTripMath();
