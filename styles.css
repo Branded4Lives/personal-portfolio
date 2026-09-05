@@ -514,6 +514,12 @@ body {
   color: #10202a;
 }
 
+.booking-card {
+  border-color: rgba(0, 108, 228, 0.55);
+  background: #ffffff;
+  color: #1a1a1a;
+}
+
 .demo-preview {
   position: relative;
   display: grid;
@@ -552,6 +558,14 @@ body {
       transparent 1px 28px
     ),
     linear-gradient(135deg, #eaf8ff, #fff1ce);
+}
+
+.booking-preview {
+  grid-template-rows: minmax(96px, 1fr) auto auto;
+  gap: 10px;
+  background:
+    linear-gradient(90deg, rgba(0, 34, 79, 0.78), rgba(0, 34, 79, 0.22)),
+    url("images/booksmart-stays-hero.jpg") center / cover;
 }
 
 .preview-pipeline,
@@ -745,6 +759,111 @@ body {
 
 .scheduler-card .preview-booking strong {
   color: #10202a;
+}
+
+.booking-card .demo-project-copy {
+  border-top: 1px solid rgba(0, 108, 228, 0.16);
+  background: #ffffff;
+}
+
+.booking-card .project-type,
+.booking-card .demo-project-copy h3,
+.booking-card .demo-project-copy p:not(.project-type),
+.booking-card .project-link {
+  color: #1a1a1a;
+}
+
+.booking-card .project-type {
+  color: #006ce4;
+}
+
+.booking-card .project-tags span {
+  border-color: rgba(0, 108, 228, 0.2);
+  background: #eaf4ff;
+  color: #003b95;
+}
+
+.preview-booking-hero {
+  display: grid;
+  align-content: end;
+  gap: 6px;
+  color: #ffffff;
+}
+
+.preview-booking-hero span {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 11px;
+  text-transform: uppercase;
+}
+
+.preview-booking-hero strong {
+  max-width: 220px;
+  font-family: "Raleway", sans-serif;
+  font-size: 24px;
+  line-height: 1.05;
+}
+
+.preview-search-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) 72px;
+  gap: 4px;
+  border: 3px solid #febb02;
+  border-radius: 7px;
+  background: #febb02;
+}
+
+.preview-search-row span,
+.preview-search-row strong {
+  min-height: 38px;
+  padding: 11px 9px;
+  background: #ffffff;
+  color: #1a1a1a;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 10px;
+  line-height: 1.1;
+}
+
+.preview-search-row strong {
+  display: grid;
+  place-items: center;
+  border-radius: 3px;
+  background: #006ce4;
+  color: #ffffff;
+}
+
+.preview-stay-row {
+  display: grid;
+  grid-template-columns: 58px minmax(0, 1fr);
+  gap: 10px;
+  border-radius: 7px;
+  padding: 9px;
+  background: #ffffff;
+}
+
+.preview-stay-row > span {
+  min-height: 46px;
+  border-radius: 5px;
+  background: url("images/booksmart-stays-hero.jpg") center / cover;
+}
+
+.preview-stay-row div {
+  display: grid;
+  gap: 4px;
+  align-content: center;
+}
+
+.preview-stay-row strong {
+  color: #006ce4;
+  font-family: "Raleway", sans-serif;
+  font-size: 14px;
+  line-height: 1.05;
+}
+
+.preview-stay-row em {
+  color: #1a1a1a;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 10px;
+  font-style: normal;
 }
 
 .demo-project-copy {

@@ -3,11 +3,11 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>BookSmart Scheduler Demo</title>
+    <title>BookSmart Stays Demo</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;700&family=Inter:wght@500;700;800;900&display=swap"
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;700&family=Inter:wght@500;600;700;800;900&display=swap"
       rel="stylesheet"
     />
     <link
@@ -17,427 +17,464 @@
     <link rel="stylesheet" href="../assets/demo.css" />
   </head>
 
-  <body class="scheduler-demo">
-    <div class="demo-shell">
-      <nav class="demo-nav">
-        <a class="demo-brand" href="../../">
-          <span class="brand-mark"><i class="fa-solid fa-calendar-check"></i></span>
-          BookSmart
-        </a>
-        <div class="demo-nav-actions">
-          <a class="ghost-link" href="../../#project-demos">Back to portfolio</a>
-          <a class="primary-link" href="mailto:bmcgahuey@gmail.com">Request a build</a>
+  <body class="booking-demo">
+    <header class="booking-topbar">
+      <div class="booking-shell">
+        <nav class="booking-nav" aria-label="BookSmart navigation">
+          <a class="booking-logo" href="../../">
+            <i class="fa-solid fa-bed" aria-hidden="true"></i>
+            BookSmart
+          </a>
+
+          <div class="booking-actions">
+            <span>USD</span>
+            <button type="button" aria-label="Help">
+              <i class="fa-regular fa-circle-question" aria-hidden="true"></i>
+            </button>
+            <a href="mailto:bmcgahuey@gmail.com">List your stay</a>
+            <a class="booking-outline" href="../../#project-demos">Portfolio</a>
+            <a class="booking-solid" href="mailto:bmcgahuey@gmail.com">Request a build</a>
+          </div>
+        </nav>
+
+        <div class="booking-tabs" aria-label="Travel product sections">
+          <button class="active" type="button" data-travel-tab="Stays">
+            <i class="fa-solid fa-bed" aria-hidden="true"></i>
+            Stays
+          </button>
+          <button type="button" data-travel-tab="Flights">
+            <i class="fa-solid fa-plane" aria-hidden="true"></i>
+            Flights
+          </button>
+          <button type="button" data-travel-tab="Packages">
+            <i class="fa-solid fa-suitcase-rolling" aria-hidden="true"></i>
+            Packages
+          </button>
+          <button type="button" data-travel-tab="Cars">
+            <i class="fa-solid fa-car" aria-hidden="true"></i>
+            Cars
+          </button>
+          <button type="button" data-travel-tab="Experiences">
+            <i class="fa-solid fa-map-location-dot" aria-hidden="true"></i>
+            Experiences
+          </button>
         </div>
-      </nav>
+      </div>
+    </header>
 
-      <header class="app-hero scheduler-hero">
-        <section class="hero-copy">
-          <p class="eyebrow">Scheduling and intake system</p>
-          <h1>A booking console for services that depend on capacity.</h1>
-          <p>
-            BookSmart shows calendar state, service selection, slot filtering,
-            booking summaries, and waitlist routing. It is shaped like a real
-            service business tool rather than another generic analytics page.
-          </p>
-        </section>
-
-        <aside class="hero-aside week-snapshot" aria-label="Weekly capacity snapshot">
-          <div class="snapshot-day">
-            <strong>Monday</strong>
-            <div class="snapshot-track"><span style="width: 82%"></span></div>
-            <em>82%</em>
-          </div>
-          <div class="snapshot-day">
-            <strong>Tuesday</strong>
-            <div class="snapshot-track"><span style="width: 64%"></span></div>
-            <em>64%</em>
-          </div>
-          <div class="snapshot-day">
-            <strong>Wednesday</strong>
-            <div class="snapshot-track"><span style="width: 91%"></span></div>
-            <em>91%</em>
-          </div>
-          <div class="snapshot-day">
-            <strong>Thursday</strong>
-            <div class="snapshot-track"><span style="width: 48%"></span></div>
-            <em>48%</em>
-          </div>
-          <div class="snapshot-day">
-            <strong>Friday</strong>
-            <div class="snapshot-track"><span style="width: 72%"></span></div>
-            <em>72%</em>
-          </div>
-        </aside>
-      </header>
-
-      <section class="metric-strip" aria-label="Scheduling metrics">
-        <article class="metric-card">
-          <span>Open slots</span>
-          <strong id="open-slot-count">8</strong>
-          <small>updated by slot filter</small>
-        </article>
-        <article class="metric-card">
-          <span>Waitlist</span>
-          <strong>7</strong>
-          <small>3 high priority</small>
-        </article>
-        <article class="metric-card">
-          <span>No-show risk</span>
-          <strong>6%</strong>
-          <small>reminders sent</small>
-        </article>
-        <article class="metric-card">
-          <span>Selected deposit</span>
-          <strong id="selected-deposit">$35</strong>
-          <small>from service type</small>
-        </article>
+    <main>
+      <section class="booking-hero">
+        <img
+          src="../../images/booksmart-stays-hero.jpg"
+          alt="Travelers arriving at a lakeside vacation lodge"
+        />
+        <div class="booking-hero-copy">
+          <p>Weekend stays with smart availability rules</p>
+          <h1>Book a better getaway without the tab chaos.</h1>
+          <span>Search lodging, compare stays, track guests, and build a checkout-ready trip summary.</span>
+        </div>
       </section>
 
-      <main class="scheduler-layout">
-        <section class="panel schedule-planner">
-          <div class="panel-header">
-            <div>
-              <h2 class="panel-title">Weekly appointment grid</h2>
-              <p class="panel-subtitle">Selectable slots with capacity and service context.</p>
-            </div>
-            <div class="segmented" aria-label="Slot filters">
-              <button class="active" data-slot-filter="all">All</button>
-              <button data-slot-filter="open">Open</button>
-              <button data-slot-filter="waitlist">Waitlist</button>
-              <button data-slot-filter="blocked">Blocked</button>
-            </div>
-          </div>
-
-          <div class="week-calendar" id="week-calendar">
-            <section class="day-column" aria-label="Monday appointments">
-              <div class="day-heading">
-                <h3>Mon</h3>
-                <span>18 bookings</span>
-              </div>
-              <button
-                class="slot-card active"
-                data-slot-type="open"
-                data-time="Mon 8:30 AM"
-                data-staff="Avery"
-                data-room="Studio A"
-                data-status="Open"
-              >
-                <span class="slot-time">8:30 AM</span>
-                <strong>Website consult</strong>
-                <small>Avery, Studio A</small>
-                <span class="status green">Open</span>
-              </button>
-              <button
-                class="slot-card"
-                data-slot-type="waitlist"
-                data-time="Mon 10:00 AM"
-                data-staff="Mika"
-                data-room="Remote"
-                data-status="Waitlist"
-              >
-                <span class="slot-time">10:00 AM</span>
-                <strong>Intake review</strong>
-                <small>Mika, Remote</small>
-                <span class="status amber">Waitlist</span>
-              </button>
-              <button
-                class="slot-card"
-                data-slot-type="open"
-                data-time="Mon 1:30 PM"
-                data-staff="Avery"
-                data-room="Studio B"
-                data-status="Open"
-              >
-                <span class="slot-time">1:30 PM</span>
-                <strong>Workflow map</strong>
-                <small>Avery, Studio B</small>
-                <span class="status green">Open</span>
-              </button>
-            </section>
-
-            <section class="day-column" aria-label="Tuesday appointments">
-              <div class="day-heading">
-                <h3>Tue</h3>
-                <span>15 bookings</span>
-              </div>
-              <button
-                class="slot-card"
-                data-slot-type="blocked"
-                data-time="Tue 9:15 AM"
-                data-staff="Team"
-                data-room="Internal"
-                data-status="Blocked"
-              >
-                <span class="slot-time">9:15 AM</span>
-                <strong>Staff planning</strong>
-                <small>Team, Internal</small>
-                <span class="status rose">Blocked</span>
-              </button>
-              <button
-                class="slot-card"
-                data-slot-type="open"
-                data-time="Tue 11:45 AM"
-                data-staff="Mika"
-                data-room="Remote"
-                data-status="Open"
-              >
-                <span class="slot-time">11:45 AM</span>
-                <strong>Checkout QA</strong>
-                <small>Mika, Remote</small>
-                <span class="status green">Open</span>
-              </button>
-            </section>
-
-            <section class="day-column" aria-label="Wednesday appointments">
-              <div class="day-heading">
-                <h3>Wed</h3>
-                <span>21 bookings</span>
-              </div>
-              <button
-                class="slot-card"
-                data-slot-type="waitlist"
-                data-time="Wed 8:00 AM"
-                data-staff="Avery"
-                data-room="Studio A"
-                data-status="Waitlist"
-              >
-                <span class="slot-time">8:00 AM</span>
-                <strong>Estimate review</strong>
-                <small>Avery, Studio A</small>
-                <span class="status amber">Waitlist</span>
-              </button>
-              <button
-                class="slot-card"
-                data-slot-type="open"
-                data-time="Wed 2:00 PM"
-                data-staff="Jules"
-                data-room="Studio C"
-                data-status="Open"
-              >
-                <span class="slot-time">2:00 PM</span>
-                <strong>Launch check</strong>
-                <small>Jules, Studio C</small>
-                <span class="status green">Open</span>
-              </button>
-            </section>
-
-            <section class="day-column" aria-label="Thursday appointments">
-              <div class="day-heading">
-                <h3>Thu</h3>
-                <span>11 bookings</span>
-              </div>
-              <button
-                class="slot-card"
-                data-slot-type="open"
-                data-time="Thu 10:30 AM"
-                data-staff="Mika"
-                data-room="Remote"
-                data-status="Open"
-              >
-                <span class="slot-time">10:30 AM</span>
-                <strong>Scope review</strong>
-                <small>Mika, Remote</small>
-                <span class="status green">Open</span>
-              </button>
-              <button
-                class="slot-card"
-                data-slot-type="open"
-                data-time="Thu 3:15 PM"
-                data-staff="Jules"
-                data-room="Studio B"
-                data-status="Open"
-              >
-                <span class="slot-time">3:15 PM</span>
-                <strong>Content handoff</strong>
-                <small>Jules, Studio B</small>
-                <span class="status green">Open</span>
-              </button>
-            </section>
-
-            <section class="day-column" aria-label="Friday appointments">
-              <div class="day-heading">
-                <h3>Fri</h3>
-                <span>16 bookings</span>
-              </div>
-              <button
-                class="slot-card"
-                data-slot-type="blocked"
-                data-time="Fri 9:00 AM"
-                data-staff="Team"
-                data-room="Internal"
-                data-status="Blocked"
-              >
-                <span class="slot-time">9:00 AM</span>
-                <strong>Release window</strong>
-                <small>Team, Internal</small>
-                <span class="status rose">Blocked</span>
-              </button>
-              <button
-                class="slot-card"
-                data-slot-type="open"
-                data-time="Fri 1:00 PM"
-                data-staff="Avery"
-                data-room="Studio A"
-                data-status="Open"
-              >
-                <span class="slot-time">1:00 PM</span>
-                <strong>Final walkthrough</strong>
-                <small>Avery, Studio A</small>
-                <span class="status green">Open</span>
-              </button>
-            </section>
-          </div>
-        </section>
-
-        <aside class="panel booking-builder" aria-live="polite">
-          <div class="panel-header">
-            <div>
-              <h2 class="panel-title">Booking builder</h2>
-              <p class="panel-subtitle">Slot and service details update together.</p>
-            </div>
-          </div>
-
-          <label>
-            <span class="inspector-label">Service type</span>
-            <select class="select-control" id="service-select">
-              <option data-duration="45 min" data-deposit="$35" data-price="$180">Website consult</option>
-              <option data-duration="60 min" data-deposit="$50" data-price="$240">Workflow mapping</option>
-              <option data-duration="90 min" data-deposit="$75" data-price="$360">Launch QA block</option>
-            </select>
+      <section class="booking-shell booking-search-wrap" aria-label="Stay search">
+        <form class="booking-search" id="booking-search">
+          <label class="booking-field destination-field">
+            <span>Destination</span>
+            <i class="fa-solid fa-location-dot" aria-hidden="true"></i>
+            <input id="destination-input" value="Lake Tahoe" aria-label="Destination" />
           </label>
 
-          <div class="selected-slot">
-            <div class="slot-summary-row">
-              <span>Selected slot</span>
-              <strong id="selected-time">Mon 8:30 AM</strong>
-            </div>
-            <div class="slot-summary-row">
-              <span>Staff</span>
-              <strong id="selected-staff">Avery</strong>
-            </div>
-            <div class="slot-summary-row">
-              <span>Location</span>
-              <strong id="selected-room">Studio A</strong>
-            </div>
-            <div class="slot-summary-row">
-              <span>Status</span>
-              <strong id="selected-status">Open</strong>
+          <label class="booking-field">
+            <span>Check-in</span>
+            <i class="fa-regular fa-calendar" aria-hidden="true"></i>
+            <input id="checkin-input" type="date" value="2026-09-18" aria-label="Check-in date" />
+          </label>
+
+          <label class="booking-field">
+            <span>Check-out</span>
+            <i class="fa-regular fa-calendar-check" aria-hidden="true"></i>
+            <input id="checkout-input" type="date" value="2026-09-21" aria-label="Check-out date" />
+          </label>
+
+          <div class="booking-field guest-field">
+            <span>Guests</span>
+            <i class="fa-regular fa-user" aria-hidden="true"></i>
+            <strong id="guest-label">2 adults, 1 room</strong>
+            <div class="guest-stepper" aria-label="Guest controls">
+              <button type="button" id="remove-guest" aria-label="Remove guest">
+                <i class="fa-solid fa-minus" aria-hidden="true"></i>
+              </button>
+              <button type="button" id="add-guest" aria-label="Add guest">
+                <i class="fa-solid fa-plus" aria-hidden="true"></i>
+              </button>
             </div>
           </div>
 
-          <div class="service-summary">
-            <div class="service-summary-row">
-              <span>Duration</span>
-              <strong id="service-duration">45 min</strong>
-            </div>
-            <div class="service-summary-row">
-              <span>Price</span>
-              <strong id="service-price">$180</strong>
-            </div>
-          </div>
-
-          <button class="primary-button" type="button" id="reserve-button">
-            <i class="fa-solid fa-check" aria-hidden="true"></i>
-            Reserve slot
+          <button class="booking-submit" type="submit">
+            <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+            Search
           </button>
-          <p class="reserve-state" id="reserve-state">Draft booking ready.</p>
-        </aside>
-      </main>
+        </form>
 
-      <section class="ops-grid" aria-label="Scheduling operations">
-        <article class="ops-card">
-          <i class="fa-solid fa-inbox" aria-hidden="true"></i>
-          <h3>Intake queue</h3>
-          <p>Route new requests by urgency, service type, staff skill, and the customer details already captured.</p>
-        </article>
-        <article class="ops-card">
-          <i class="fa-solid fa-clock" aria-hidden="true"></i>
-          <h3>Reminder logic</h3>
-          <p>Connect email or SMS reminders to confirmation status, deposits, and no-show risk.</p>
-        </article>
-        <article class="ops-card">
-          <i class="fa-solid fa-user-check" aria-hidden="true"></i>
-          <h3>Staff capacity</h3>
-          <p>Protect schedules by showing when team availability, service length, and blocked release windows collide.</p>
-        </article>
+        <div class="booking-checks" aria-label="Search options">
+          <label><input type="checkbox" /> I'm traveling for work</label>
+          <label><input type="checkbox" checked /> Show flexible cancellation</label>
+          <label><input type="checkbox" /> Add flights to my search</label>
+        </div>
       </section>
 
-      <p class="footer-note">
-        Portfolio demo built as a static front-end prototype for GitHub Pages.
-      </p>
-    </div>
+      <section class="booking-shell booking-content">
+        <aside class="booking-filter-panel">
+          <div>
+            <p class="booking-kicker">Smart filters</p>
+            <h2>Shape the trip</h2>
+          </div>
+
+          <div class="booking-filter-group" aria-label="Stay type filters">
+            <button class="active" type="button" data-stay-filter="all">All stays</button>
+            <button type="button" data-stay-filter="lodge">Lodges</button>
+            <button type="button" data-stay-filter="hotel">Hotels</button>
+            <button type="button" data-stay-filter="family">Family stays</button>
+          </div>
+
+          <div class="budget-meter" aria-label="Budget range">
+            <div>
+              <span>Nightly budget</span>
+              <strong>$180 - $420</strong>
+            </div>
+            <div class="budget-track"><span></span></div>
+          </div>
+
+          <div class="trust-list">
+            <div>
+              <i class="fa-solid fa-shield-heart" aria-hidden="true"></i>
+              <span>Cancellation policy parsed before checkout.</span>
+            </div>
+            <div>
+              <i class="fa-solid fa-receipt" aria-hidden="true"></i>
+              <span>Taxes and stay fees summarized in one place.</span>
+            </div>
+            <div>
+              <i class="fa-solid fa-bolt" aria-hidden="true"></i>
+              <span>Selections update the trip summary instantly.</span>
+            </div>
+          </div>
+        </aside>
+
+        <section class="booking-results">
+          <div class="results-heading">
+            <div>
+              <p class="booking-kicker" id="active-tab-label">Stays search</p>
+              <h2 id="results-title">Lake Tahoe: 4 available stays</h2>
+            </div>
+            <div class="sort-pill">
+              <i class="fa-solid fa-arrow-down-wide-short" aria-hidden="true"></i>
+              Best match
+            </div>
+          </div>
+
+          <div class="stay-list" id="stay-list">
+            <article
+              class="stay-card"
+              data-stay-type="lodge"
+              data-name="Pineglass Lake Lodge"
+              data-price="329"
+              data-rating="9.2"
+            >
+              <img src="../../images/booksmart-stays-hero.jpg" alt="Pineglass Lake Lodge" />
+              <div class="stay-copy">
+                <div class="stay-title-row">
+                  <div>
+                    <h3>Pineglass Lake Lodge</h3>
+                    <span>Lakefront lodge, 0.4 miles from marina</span>
+                  </div>
+                  <button class="heart-button" type="button" aria-label="Save Pineglass Lake Lodge">
+                    <i class="fa-regular fa-heart" aria-hidden="true"></i>
+                  </button>
+                </div>
+                <div class="stay-badges">
+                  <span>Free cancellation</span>
+                  <span>Breakfast included</span>
+                  <span>Lake view</span>
+                </div>
+                <p>Best for travelers who want a quiet waterfront stay with fast access to trails and boat rentals.</p>
+              </div>
+              <div class="stay-price">
+                <span class="rating-pill">9.2 Superb</span>
+                <strong>$329</strong>
+                <small>per night</small>
+                <button class="select-stay" type="button">Select stay</button>
+              </div>
+            </article>
+
+            <article
+              class="stay-card"
+              data-stay-type="hotel"
+              data-name="Northstar City Hotel"
+              data-price="214"
+              data-rating="8.7"
+            >
+              <img src="../../images/booksmart-city-hotel.jpg" alt="Northstar City Hotel" />
+              <div class="stay-copy">
+                <div class="stay-title-row">
+                  <div>
+                    <h3>Northstar City Hotel</h3>
+                    <span>Downtown stay, walkable restaurants</span>
+                  </div>
+                  <button class="heart-button" type="button" aria-label="Save Northstar City Hotel">
+                    <i class="fa-regular fa-heart" aria-hidden="true"></i>
+                  </button>
+                </div>
+                <div class="stay-badges">
+                  <span>No prepayment</span>
+                  <span>Workspace</span>
+                  <span>Parking</span>
+                </div>
+                <p>A practical city base for work trips, conferences, and guests who care about location first.</p>
+              </div>
+              <div class="stay-price">
+                <span class="rating-pill">8.7 Excellent</span>
+                <strong>$214</strong>
+                <small>per night</small>
+                <button class="select-stay" type="button">Select stay</button>
+              </div>
+            </article>
+
+            <article
+              class="stay-card"
+              data-stay-type="family"
+              data-name="Cedar Cove Family Suites"
+              data-price="286"
+              data-rating="9.0"
+            >
+              <img src="../../images/booksmart-family-suite.jpg" alt="Cedar Cove Family Suites" />
+              <div class="stay-copy">
+                <div class="stay-title-row">
+                  <div>
+                    <h3>Cedar Cove Family Suites</h3>
+                    <span>Two-bedroom suites near the beach path</span>
+                  </div>
+                  <button class="heart-button" type="button" aria-label="Save Cedar Cove Family Suites">
+                    <i class="fa-regular fa-heart" aria-hidden="true"></i>
+                  </button>
+                </div>
+                <div class="stay-badges">
+                  <span>Kitchen</span>
+                  <span>Washer and dryer</span>
+                  <span>Family rooms</span>
+                </div>
+                <p>Designed for longer weekends where guests need space, flexible sleeping options, and simple check-in.</p>
+              </div>
+              <div class="stay-price">
+                <span class="rating-pill">9.0 Wonderful</span>
+                <strong>$286</strong>
+                <small>per night</small>
+                <button class="select-stay" type="button">Select stay</button>
+              </div>
+            </article>
+
+            <article
+              class="stay-card"
+              data-stay-type="lodge"
+              data-name="Harbor Trail Cabins"
+              data-price="178"
+              data-rating="8.5"
+            >
+              <img src="../../images/booksmart-trail-cabin.jpg" alt="Harbor Trail Cabins" />
+              <div class="stay-copy">
+                <div class="stay-title-row">
+                  <div>
+                    <h3>Harbor Trail Cabins</h3>
+                    <span>Private cabins beside the trailhead</span>
+                  </div>
+                  <button class="heart-button" type="button" aria-label="Save Harbor Trail Cabins">
+                    <i class="fa-regular fa-heart" aria-hidden="true"></i>
+                  </button>
+                </div>
+                <div class="stay-badges">
+                  <span>Pet friendly</span>
+                  <span>Fire pit</span>
+                  <span>Self check-in</span>
+                </div>
+                <p>A lower-cost option for outdoor weekends with a clean, fast path from search to reservation.</p>
+              </div>
+              <div class="stay-price">
+                <span class="rating-pill">8.5 Very good</span>
+                <strong>$178</strong>
+                <small>per night</small>
+                <button class="select-stay" type="button">Select stay</button>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <aside class="trip-summary" aria-live="polite">
+          <p class="booking-kicker">Trip summary</p>
+          <h2 id="summary-stay">Pineglass Lake Lodge</h2>
+          <div class="summary-lines">
+            <div>
+              <span>Destination</span>
+              <strong id="summary-destination">Lake Tahoe</strong>
+            </div>
+            <div>
+              <span>Dates</span>
+              <strong id="summary-dates">Sep 18 - Sep 21</strong>
+            </div>
+            <div>
+              <span>Guests</span>
+              <strong id="summary-guests">2 adults</strong>
+            </div>
+            <div>
+              <span>Rating</span>
+              <strong id="summary-rating">9.2</strong>
+            </div>
+          </div>
+          <div class="summary-total">
+            <span id="summary-nights">3 nights</span>
+            <strong id="summary-total">$1,115</strong>
+          </div>
+          <button class="booking-solid full-width" type="button">
+            <i class="fa-solid fa-lock" aria-hidden="true"></i>
+            Continue checkout
+          </button>
+        </aside>
+      </section>
+    </main>
 
     <script>
-      const slotButtons = document.querySelectorAll(".slot-card");
-      const filterButtons = document.querySelectorAll("[data-slot-filter]");
-      const openSlotCount = document.querySelector("#open-slot-count");
-      const selectedDeposit = document.querySelector("#selected-deposit");
-      const selectedTime = document.querySelector("#selected-time");
-      const selectedStaff = document.querySelector("#selected-staff");
-      const selectedRoom = document.querySelector("#selected-room");
-      const selectedStatus = document.querySelector("#selected-status");
-      const serviceSelect = document.querySelector("#service-select");
-      const serviceDuration = document.querySelector("#service-duration");
-      const servicePrice = document.querySelector("#service-price");
-      const reserveButton = document.querySelector("#reserve-button");
-      const reserveState = document.querySelector("#reserve-state");
+      const travelTabs = document.querySelectorAll("[data-travel-tab]");
+      const activeTabLabel = document.querySelector("#active-tab-label");
+      const destinationInput = document.querySelector("#destination-input");
+      const checkinInput = document.querySelector("#checkin-input");
+      const checkoutInput = document.querySelector("#checkout-input");
+      const bookingSearch = document.querySelector("#booking-search");
+      const guestLabel = document.querySelector("#guest-label");
+      const summaryGuests = document.querySelector("#summary-guests");
+      const addGuest = document.querySelector("#add-guest");
+      const removeGuest = document.querySelector("#remove-guest");
+      const filterButtons = document.querySelectorAll("[data-stay-filter]");
+      const stayCards = document.querySelectorAll(".stay-card");
+      const resultsTitle = document.querySelector("#results-title");
+      const summaryStay = document.querySelector("#summary-stay");
+      const summaryDestination = document.querySelector("#summary-destination");
+      const summaryDates = document.querySelector("#summary-dates");
+      const summaryRating = document.querySelector("#summary-rating");
+      const summaryNights = document.querySelector("#summary-nights");
+      const summaryTotal = document.querySelector("#summary-total");
+      const formatter = new Intl.NumberFormat("en-US", {
+        style: "currency",
+        currency: "USD",
+        maximumFractionDigits: 0,
+      });
+      let guests = 2;
+      let selectedNightlyRate = 329;
 
-      function selectSlot(slot) {
-        slotButtons.forEach((button) => button.classList.toggle("active", button === slot));
-        selectedTime.textContent = slot.dataset.time;
-        selectedStaff.textContent = slot.dataset.staff;
-        selectedRoom.textContent = slot.dataset.room;
-        selectedStatus.textContent = slot.dataset.status;
-        reserveState.textContent = `${slot.dataset.status} slot selected.`;
-      }
-
-      function refreshSlotFilter(filter) {
-        let openCount = 0;
-        slotButtons.forEach((slot) => {
-          const isVisible = filter === "all" || slot.dataset.slotType === filter;
-          slot.hidden = !isVisible;
-          if (isVisible && slot.dataset.slotType === "open") {
-            openCount += 1;
-          }
+      function formatDateRange() {
+        const checkin = new Date(`${checkinInput.value}T00:00:00`);
+        const checkout = new Date(`${checkoutInput.value}T00:00:00`);
+        const dateFormat = new Intl.DateTimeFormat("en-US", {
+          month: "short",
+          day: "numeric",
         });
-        openSlotCount.textContent = openCount;
-
-        const selected = document.querySelector(".slot-card.active");
-        if (!selected || selected.hidden) {
-          const firstVisible = Array.from(slotButtons).find((slot) => !slot.hidden);
-          if (firstVisible) {
-            selectSlot(firstVisible);
-          }
+        if (Number.isNaN(checkin.getTime()) || Number.isNaN(checkout.getTime())) {
+          return { label: "Select dates", nights: 1 };
         }
+        const msPerNight = 1000 * 60 * 60 * 24;
+        const nights = Math.max(1, Math.round((checkout - checkin) / msPerNight));
+        return {
+          label: `${dateFormat.format(checkin)} - ${dateFormat.format(checkout)}`,
+          nights,
+        };
       }
 
-      function refreshService() {
-        const option = serviceSelect.selectedOptions[0];
-        serviceDuration.textContent = option.dataset.duration;
-        servicePrice.textContent = option.dataset.price;
-        selectedDeposit.textContent = option.dataset.deposit;
-        reserveState.textContent = `${option.textContent} draft booking ready.`;
+      function updateTripMath() {
+        const dateRange = formatDateRange();
+        const taxesAndFees = 128;
+        summaryDates.textContent = dateRange.label;
+        summaryNights.textContent = `${dateRange.nights} ${dateRange.nights === 1 ? "night" : "nights"}`;
+        summaryTotal.textContent = formatter.format(selectedNightlyRate * dateRange.nights + taxesAndFees);
       }
+
+      function updateGuests() {
+        guestLabel.textContent = `${guests} ${guests === 1 ? "adult" : "adults"}, 1 room`;
+        summaryGuests.textContent = `${guests} ${guests === 1 ? "adult" : "adults"}`;
+      }
+
+      function updateResultsTitle() {
+        const visibleCount = Array.from(stayCards).filter((card) => !card.hidden).length;
+        const destination = destinationInput.value.trim() || "Anywhere";
+        resultsTitle.textContent = `${destination}: ${visibleCount} available ${visibleCount === 1 ? "stay" : "stays"}`;
+        summaryDestination.textContent = destination;
+      }
+
+      function selectStay(card) {
+        stayCards.forEach((stay) => stay.classList.toggle("selected", stay === card));
+        selectedNightlyRate = Number(card.dataset.price);
+        summaryStay.textContent = card.dataset.name;
+        summaryRating.textContent = card.dataset.rating;
+        updateTripMath();
+      }
+
+      travelTabs.forEach((button) => {
+        button.addEventListener("click", () => {
+          travelTabs.forEach((tab) => tab.classList.toggle("active", tab === button));
+          activeTabLabel.textContent = `${button.dataset.travelTab} search`;
+        });
+      });
+
+      addGuest.addEventListener("click", () => {
+        guests = Math.min(8, guests + 1);
+        updateGuests();
+      });
+
+      removeGuest.addEventListener("click", () => {
+        guests = Math.max(1, guests - 1);
+        updateGuests();
+      });
 
       filterButtons.forEach((button) => {
         button.addEventListener("click", () => {
-          filterButtons.forEach((item) => item.classList.toggle("active", item === button));
-          refreshSlotFilter(button.dataset.slotFilter);
+          filterButtons.forEach((filter) => filter.classList.toggle("active", filter === button));
+          const filter = button.dataset.stayFilter;
+          stayCards.forEach((card) => {
+            card.hidden = filter !== "all" && card.dataset.stayType !== filter;
+          });
+          const firstVisible = Array.from(stayCards).find((card) => !card.hidden);
+          if (firstVisible) {
+            selectStay(firstVisible);
+          }
+          updateResultsTitle();
         });
       });
 
-      slotButtons.forEach((slot) => {
-        slot.addEventListener("click", () => selectSlot(slot));
+      document.querySelectorAll(".select-stay").forEach((button) => {
+        button.addEventListener("click", () => {
+          selectStay(button.closest(".stay-card"));
+        });
       });
 
-      serviceSelect.addEventListener("change", refreshService);
-
-      reserveButton.addEventListener("click", () => {
-        reserveState.textContent = `${serviceSelect.value} reserved for ${selectedTime.textContent}.`;
+      document.querySelectorAll(".heart-button").forEach((button) => {
+        button.addEventListener("click", () => {
+          button.classList.toggle("saved");
+          const icon = button.querySelector("i");
+          icon.classList.toggle("fa-regular");
+          icon.classList.toggle("fa-solid");
+        });
       });
 
-      refreshSlotFilter("all");
-      refreshService();
+      bookingSearch.addEventListener("submit", (event) => {
+        event.preventDefault();
+        updateResultsTitle();
+        updateTripMath();
+      });
+
+      checkinInput.addEventListener("change", updateTripMath);
+      checkoutInput.addEventListener("change", updateTripMath);
+      destinationInput.addEventListener("input", updateResultsTitle);
+
+      selectStay(document.querySelector(".stay-card"));
+      updateGuests();
+      updateResultsTitle();
+      updateTripMath();
     </script>
   </body>
 </html>
