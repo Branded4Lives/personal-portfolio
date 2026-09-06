@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Drive&amp;Dine Demo</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;700&family=Inter:wght@500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="../assets/demo.css" />
+  </head>
+
+  <body class="drive-demo">
+    <header class="drive-header">
+      <nav class="drive-shell drive-nav" aria-label="Drive&Dine navigation">
+        <a class="drive-brand" href="../../">
+          <span><i class="fa-solid fa-utensils" aria-hidden="true"></i></span>
+          Drive&amp;Dine
+        </a>
+
+        <div class="drive-nav-actions">
+          <a class="drive-ghost" href="../../#project-demos">
+            <i class="fa-solid fa-arrow-left" aria-hidden="true"></i>
+            Portfolio
+          </a>
+          <a class="drive-solid" href="mailto:bmcgahuey@gmail.com">
+            <i class="fa-solid fa-paper-plane" aria-hidden="true"></i>
+            Request a build
+          </a>
+        </div>
+      </nav>
+    </header>
+
+    <main class="drive-shell drive-app">
+      <section class="route-planner" aria-label="Route planner">
+        <div class="planner-copy">
+          <p class="drive-kicker">Route dining engine</p>
+          <h1>Find the best meal stop without wrecking the drive.</h1>
+          <p>
+            The planner predicts where you will be near meal time, ranks
+            five-star restaurants by detour and review confidence, then adds the
+            best stop to the route.
+          </p>
+        </div>
+
+        <form class="drive-form" id="drive-form">
+          <label class="drive-field">
+            <span>Start</span>
+            <i class="fa-solid fa-location-arrow" aria-hidden="true"></i>
+            <input id="origin-input" value="Columbus, OH" aria-label="Starting point" />
+          </label>
+
+          <label class="drive-field">
+            <span>Destination</span>
+            <i class="fa-solid fa-flag-checkered" aria-hidden="true"></i>
+            <input id="destination-input" value="Asheville, NC" aria-label="Destination" />
+          </label>
+
+          <label class="drive-field">
+            <span>Meal time</span>
+            <i class="fa-regular fa-clock" aria-hidden="true"></i>
+            <input id="meal-time-input" type="time" value="12:30" aria-label="Meal time" />
+          </label>
+
+          <label class="drive-field">
+            <span>Food mood</span>
+            <i class="fa-solid fa-bowl-food" aria-hidden="true"></i>
+            <select id="cuisine-input" aria-label="Food mood">
+              <option>Best overall</option>
+              <option>Local favorite</option>
+              <option>Fast but excellent</option>
+              <option>Date-worthy</option>
+            </select>
+          </label>
+
+          <label class="detour-control">
+            <span>Max detour <strong id="detour-label">15 min</strong></span>
+            <input
+              id="detour-input"
+              type="range"
+              min="5"
+              max="30"
+              step="5"
+              value="15"
+              aria-label="Maximum detour in minutes"
+            />
+          </label>
+
+          <button class="drive-submit" type="submit">
+            <i class="fa-solid fa-route" aria-hidden="true"></i>
+            Plan stop
+          </button>
+        </form>
+      </section>
+
+      <section class="drive-map-panel" aria-label="Route map">
+        <div class="route-canvas">
+          <img
+            src="../../images/drive-dine-hero.jpg"
+            alt="Road trip route near a scenic restaurant"
+          />
+          <div class="route-shade" aria-hidden="true"></div>
+          <svg class="route-line" viewBox="0 0 740 390" aria-hidden="true">
+            <path
+              d="M56 306 C152 230 224 265 306 190 C388 116 478 159 570 82 C615 44 667 57 701 35"
+            />
+          </svg>
+
+          <div class="route-pin start-pin">
+            <span>Start</span>
+            <strong id="map-origin">Columbus</strong>
+          </div>
+          <div class="route-pin meal-pin">
+            <span>Lunch</span>
+            <strong id="map-stop">Copper Fern Table</strong>
+          </div>
+          <div class="route-pin end-pin">
+            <span>Arrive</span>
+            <strong id="map-destination">Asheville</strong>
+          </div>
+
+          <aside class="map-score-card">
+            <span>Selected stop</span>
+            <strong id="map-score">5.0 stars</strong>
+            <em id="map-reason">8 min detour, open at 12:30 PM</em>
+          </aside>
+        </div>
+      </section>
+
+      <section class="route-timeline" aria-label="Route timeline">
+        <article>
+          <span>09:10 AM</span>
+          <strong id="timeline-origin">Leave Columbus, OH</strong>
+        </article>
+        <article class="active">
+          <span id="timeline-meal-time">12:30 PM</span>
+          <strong id="timeline-stop">Copper Fern Table added</strong>
+        </article>
+        <article>
+          <span>01:45 PM</span>
+          <strong id="timeline-attraction">Optional overlook nearby</strong>
+        </article>
+        <article>
+          <span>05:20 PM</span>
+          <strong id="timeline-destination">Arrive Asheville, NC</strong>
+        </article>
+      </section>
+
+      <section class="drive-workspace">
+        <aside class="source-panel">
+          <p class="drive-kicker">Ranking logic</p>
+          <h2>Why this stop wins</h2>
+          <div class="ranking-list">
+            <div>
+              <i class="fa-solid fa-star" aria-hidden="true"></i>
+              <span>Rating floor</span>
+              <strong>5.0</strong>
+            </div>
+            <div>
+              <i class="fa-solid fa-comments" aria-hidden="true"></i>
+              <span>Review confidence</span>
+              <strong id="confidence-score">624</strong>
+            </div>
+            <div>
+              <i class="fa-solid fa-road" aria-hidden="true"></i>
+              <span>Route detour</span>
+              <strong id="detour-score">8 min</strong>
+            </div>
+            <div>
+              <i class="fa-solid fa-door-open" aria-hidden="true"></i>
+              <span>Open at meal time</span>
+              <strong id="open-score">Yes</strong>
+            </div>
+          </div>
+        </aside>
+
+        <section class="restaurant-panel">
+          <div class="panel-heading">
+            <div>
+              <p class="drive-kicker">Five-star food stops</p>
+              <h2 id="restaurant-count">3 matches within 15 minutes</h2>
+            </div>
+            <span class="signal-pill">
+              <i class="fa-solid fa-signal" aria-hidden="true"></i>
+              Live route fit
+            </span>
+          </div>
+
+          <div class="restaurant-grid">
+            <article
+              class="restaurant-card selected"
+              data-name="Copper Fern Table"
+              data-rating="5.0"
+              data-reviews="624"
+              data-detour="8"
+              data-open="Yes"
+              data-reason="8 min detour, open at 12:30 PM"
+            >
+              <img src="../../images/drive-dine-restaurant.jpg" alt="Copper Fern Table dining room" />
+              <div class="restaurant-copy">
+                <div class="restaurant-title-row">
+                  <div>
+                    <h3>Copper Fern Table</h3>
+                    <span>Farm kitchen near the route split</span>
+                  </div>
+                  <button class="save-stop" type="button" aria-label="Save Copper Fern Table">
+                    <i class="fa-regular fa-bookmark" aria-hidden="true"></i>
+                  </button>
+                </div>
+                <p>Best balance of review volume, lunch timing, and shortest route interruption.</p>
+                <div class="restaurant-meta">
+                  <span>5.0 stars</span>
+                  <span>624 reviews</span>
+                  <span>8 min detour</span>
+                </div>
+                <button class="choose-restaurant" type="button">Add to route</button>
+              </div>
+            </article>
+
+            <article
+              class="restaurant-card"
+              data-name="Juniper Smokehouse"
+              data-rating="5.0"
+              data-reviews="312"
+              data-detour="14"
+              data-open="Yes"
+              data-reason="14 min detour, open at 12:30 PM"
+            >
+              <div class="restaurant-image alt-smoke" aria-hidden="true">
+                <i class="fa-solid fa-fire-burner"></i>
+              </div>
+              <div class="restaurant-copy">
+                <div class="restaurant-title-row">
+                  <div>
+                    <h3>Juniper Smokehouse</h3>
+                    <span>Regional barbecue beside the bypass</span>
+                  </div>
+                  <button class="save-stop" type="button" aria-label="Save Juniper Smokehouse">
+                    <i class="fa-regular fa-bookmark" aria-hidden="true"></i>
+                  </button>
+                </div>
+                <p>Great if the group wants a slower stop with bigger portions and easy parking.</p>
+                <div class="restaurant-meta">
+                  <span>5.0 stars</span>
+                  <span>312 reviews</span>
+                  <span>14 min detour</span>
+                </div>
+                <button class="choose-restaurant" type="button">Add to route</button>
+              </div>
+            </article>
+
+            <article
+              class="restaurant-card"
+              data-name="Market Lane Noodles"
+              data-rating="5.0"
+              data-reviews="198"
+              data-detour="18"
+              data-open="Yes"
+              data-reason="18 min detour, open at 12:30 PM"
+            >
+              <div class="restaurant-image alt-noodles" aria-hidden="true">
+                <i class="fa-solid fa-bowl-rice"></i>
+              </div>
+              <div class="restaurant-copy">
+                <div class="restaurant-title-row">
+                  <div>
+                    <h3>Market Lane Noodles</h3>
+                    <span>Fast counter-service downtown</span>
+                  </div>
+                  <button class="save-stop" type="button" aria-label="Save Market Lane Noodles">
+                    <i class="fa-regular fa-bookmark" aria-hidden="true"></i>
+                  </button>
+                </div>
+                <p>Strong food choice, but the planner flags it when the detour limit is tighter.</p>
+                <div class="restaurant-meta">
+                  <span>5.0 stars</span>
+                  <span>198 reviews</span>
+                  <span>18 min detour</span>
+                </div>
+                <button class="choose-restaurant" type="button">Add to route</button>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <aside class="itinerary-panel">
+          <p class="drive-kicker">Route draft</p>
+          <h2>Inserted stops</h2>
+          <div class="itinerary-list">
+            <div>
+              <span>01</span>
+              <strong id="itinerary-origin">Columbus, OH</strong>
+            </div>
+            <div class="meal-row">
+              <span>02</span>
+              <strong id="itinerary-stop">Copper Fern Table</strong>
+            </div>
+            <div>
+              <span>03</span>
+              <strong id="itinerary-attractions">1 attraction selected</strong>
+            </div>
+            <div>
+              <span>04</span>
+              <strong id="itinerary-destination">Asheville, NC</strong>
+            </div>
+          </div>
+          <div class="route-total">
+            <span>New trip time</span>
+            <strong id="trip-time">8h 14m</strong>
+          </div>
+        </aside>
+      </section>
+
+      <section class="attraction-section" aria-label="Attraction recommendations">
+        <div class="panel-heading">
+          <div>
+            <p class="drive-kicker">Nearby attraction ideas</p>
+            <h2>Stretch the stop without losing the day.</h2>
+          </div>
+          <span class="signal-pill">
+            <i class="fa-solid fa-person-walking" aria-hidden="true"></i>
+            30-60 minute options
+          </span>
+        </div>
+
+        <div class="attraction-grid">
+          <article class="attraction-card active" data-attraction="Ridgeview Overlook">
+            <img src="../../images/drive-dine-attraction.jpg" alt="Scenic overlook attraction" />
+            <div>
+              <span>+6 min from lunch</span>
+              <h3>Ridgeview Overlook</h3>
+              <p>Quick scenic reset with parking, restrooms, and a short overlook path.</p>
+              <button class="toggle-attraction" type="button">In itinerary</button>
+            </div>
+          </article>
+
+          <article class="attraction-card" data-attraction="Riverwalk Murals">
+            <div class="attraction-icon" aria-hidden="true">
+              <i class="fa-solid fa-palette"></i>
+            </div>
+            <div>
+              <span>+11 min from lunch</span>
+              <h3>Riverwalk Murals</h3>
+              <p>Low-friction downtown stop for photos, coffee, and a short walk.</p>
+              <button class="toggle-attraction" type="button">Add stop</button>
+            </div>
+          </article>
+
+          <article class="attraction-card" data-attraction="Old Depot Market">
+            <div class="attraction-icon market-icon" aria-hidden="true">
+              <i class="fa-solid fa-store"></i>
+            </div>
+            <div>
+              <span>+14 min from lunch</span>
+              <h3>Old Depot Market</h3>
+              <p>Good family stop with snacks, local vendors, and covered seating.</p>
+              <button class="toggle-attraction" type="button">Add stop</button>
+            </div>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <script>
+      const form = document.querySelector("#drive-form");
+      const originInput = document.querySelector("#origin-input");
+      const destinationInput = document.querySelector("#destination-input");
+      const mealTimeInput = document.querySelector("#meal-time-input");
+      const detourInput = document.querySelector("#detour-input");
+      const detourLabel = document.querySelector("#detour-label");
+      const restaurantCount = document.querySelector("#restaurant-count");
+      const restaurantCards = document.querySelectorAll(".restaurant-card");
+      const attractionCards = document.querySelectorAll(".attraction-card");
+      const mapOrigin = document.querySelector("#map-origin");
+      const mapDestination = document.querySelector("#map-destination");
+      const mapStop = document.querySelector("#map-stop");
+      const mapScore = document.querySelector("#map-score");
+      const mapReason = document.querySelector("#map-reason");
+      const timelineOrigin = document.querySelector("#timeline-origin");
+      const timelineDestination = document.querySelector("#timeline-destination");
+      const timelineMealTime = document.querySelector("#timeline-meal-time");
+      const timelineStop = document.querySelector("#timeline-stop");
+      const timelineAttraction = document.querySelector("#timeline-attraction");
+      const itineraryOrigin = document.querySelector("#itinerary-origin");
+      const itineraryDestination = document.querySelector("#itinerary-destination");
+      const itineraryStop = document.querySelector("#itinerary-stop");
+      const itineraryAttractions = document.querySelector("#itinerary-attractions");
+      const confidenceScore = document.querySelector("#confidence-score");
+      const detourScore = document.querySelector("#detour-score");
+      const openScore = document.querySelector("#open-score");
+      const tripTime = document.querySelector("#trip-time");
+
+      function cityLabel(value) {
+        return value.split(",")[0].trim() || "Start";
+      }
+
+      function formatMealTime(value) {
+        const [hours, minutes] = value.split(":").map(Number);
+        if (Number.isNaN(hours) || Number.isNaN(minutes)) {
+          return "Meal time";
+        }
+        const date = new Date();
+        date.setHours(hours, minutes, 0, 0);
+        return new Intl.DateTimeFormat("en-US", {
+          hour: "numeric",
+          minute: "2-digit",
+        }).format(date);
+      }
+
+      function updateRouteLabels() {
+        const origin = originInput.value.trim() || "Starting point";
+        const destination = destinationInput.value.trim() || "Destination";
+        mapOrigin.textContent = cityLabel(origin);
+        mapDestination.textContent = cityLabel(destination);
+        timelineOrigin.textContent = `Leave ${origin}`;
+        timelineDestination.textContent = `Arrive ${destination}`;
+        itineraryOrigin.textContent = origin;
+        itineraryDestination.textContent = destination;
+        timelineMealTime.textContent = formatMealTime(mealTimeInput.value);
+      }
+
+      function visibleRestaurants() {
+        const limit = Number(detourInput.value);
+        return Array.from(restaurantCards).filter((card) => Number(card.dataset.detour) <= limit);
+      }
+
+      function updateRestaurantFilter() {
+        const limit = Number(detourInput.value);
+        detourLabel.textContent = `${limit} min`;
+
+        restaurantCards.forEach((card) => {
+          card.hidden = Number(card.dataset.detour) > limit;
+        });
+
+        const matches = visibleRestaurants();
+        restaurantCount.textContent = `${matches.length} ${matches.length === 1 ? "match" : "matches"} within ${limit} minutes`;
+
+        const selected = document.querySelector(".restaurant-card.selected");
+        if (!selected || selected.hidden) {
+          selectRestaurant(matches[0] || restaurantCards[0]);
+        }
+      }
+
+      function selectRestaurant(card) {
+        if (!card) {
+          return;
+        }
+
+        restaurantCards.forEach((restaurant) => {
+          restaurant.classList.toggle("selected", restaurant === card);
+        });
+
+        const mealTime = formatMealTime(mealTimeInput.value);
+        const detour = Number(card.dataset.detour);
+        mapStop.textContent = card.dataset.name;
+        mapScore.textContent = `${card.dataset.rating} stars`;
+        mapReason.textContent = `${detour} min detour, open at ${mealTime}`;
+        timelineStop.textContent = `${card.dataset.name} added`;
+        itineraryStop.textContent = card.dataset.name;
+        confidenceScore.textContent = card.dataset.reviews;
+        detourScore.textContent = `${detour} min`;
+        openScore.textContent = card.dataset.open;
+        tripTime.textContent = detour <= 10 ? "8h 14m" : detour <= 15 ? "8h 23m" : "8h 31m";
+      }
+
+      function updateAttractions() {
+        const active = Array.from(attractionCards).filter((card) => card.classList.contains("active"));
+        const names = active.map((card) => card.dataset.attraction);
+        const count = active.length;
+        itineraryAttractions.textContent = `${count} ${count === 1 ? "attraction" : "attractions"} selected`;
+        timelineAttraction.textContent = names[0] ? `${names[0]} nearby` : "Optional attraction nearby";
+      }
+
+      form.addEventListener("submit", (event) => {
+        event.preventDefault();
+        updateRouteLabels();
+        updateRestaurantFilter();
+        selectRestaurant(visibleRestaurants()[0]);
+      });
+
+      [originInput, destinationInput, mealTimeInput].forEach((input) => {
+        input.addEventListener("input", () => {
+          updateRouteLabels();
+          const selected = document.querySelector(".restaurant-card.selected");
+          selectRestaurant(selected);
+        });
+      });
+
+      detourInput.addEventListener("input", updateRestaurantFilter);
+
+      document.querySelectorAll(".choose-restaurant").forEach((button) => {
+        button.addEventListener("click", () => {
+          selectRestaurant(button.closest(".restaurant-card"));
+        });
+      });
+
+      document.querySelectorAll(".save-stop").forEach((button) => {
+        button.addEventListener("click", () => {
+          button.classList.toggle("saved");
+          const icon = button.querySelector("i");
+          icon.classList.toggle("fa-regular");
+          icon.classList.toggle("fa-solid");
+        });
+      });
+
+      document.querySelectorAll(".toggle-attraction").forEach((button) => {
+        button.addEventListener("click", () => {
+          const card = button.closest(".attraction-card");
+          card.classList.toggle("active");
+          button.textContent = card.classList.contains("active") ? "In itinerary" : "Add stop";
+          updateAttractions();
+        });
+      });
+
+      updateRouteLabels();
+      updateRestaurantFilter();
+      selectRestaurant(document.querySelector(".restaurant-card.selected"));
+      updateAttractions();
+    </script>
+  </body>
+</html>

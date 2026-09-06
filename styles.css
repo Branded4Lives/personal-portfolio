@@ -520,6 +520,12 @@ body {
   color: #10231f;
 }
 
+.drive-card {
+  border-color: rgba(236, 120, 76, 0.62);
+  background: #171d1a;
+  color: #fff8ef;
+}
+
 .demo-preview {
   position: relative;
   display: grid;
@@ -576,6 +582,15 @@ body {
       transparent 1px 28px
     ),
     linear-gradient(135deg, #10231f 0%, #3f543a 58%, #b86046 100%);
+}
+
+.drive-preview {
+  grid-template-columns: minmax(0, 1fr) 120px;
+  grid-template-rows: minmax(0, 1fr) auto;
+  gap: 12px;
+  background:
+    linear-gradient(135deg, rgba(12, 17, 16, 0.82), rgba(12, 17, 16, 0.25)),
+    url("images/drive-dine-hero.jpg") center / cover;
 }
 
 .preview-pipeline,
@@ -921,6 +936,128 @@ body {
 
 .preview-atlas-panel em {
   color: #9a4f39;
+}
+
+.drive-card .demo-project-copy {
+  border-top: 1px solid rgba(236, 120, 76, 0.24);
+  background: linear-gradient(180deg, #171d1a, #101513);
+}
+
+.drive-card .project-type {
+  color: #f0a05f;
+}
+
+.drive-card .project-tags span {
+  border-color: rgba(240, 160, 95, 0.28);
+  background: rgba(240, 160, 95, 0.1);
+  color: #ffd9b4;
+}
+
+.preview-drive-map {
+  position: relative;
+  grid-row: 1 / span 2;
+  min-height: 214px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 248, 239, 0.18);
+  border-radius: 8px;
+  background:
+    repeating-linear-gradient(
+      0deg,
+      rgba(255, 248, 239, 0.08) 0 1px,
+      transparent 1px 31px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      rgba(255, 248, 239, 0.07) 0 1px,
+      transparent 1px 34px
+    ),
+    rgba(28, 42, 36, 0.62);
+}
+
+.preview-drive-route {
+  position: absolute;
+  left: 30px;
+  top: 134px;
+  width: 170px;
+  height: 3px;
+  border-radius: 999px;
+  background: #f0a05f;
+  transform: rotate(-27deg);
+  transform-origin: left center;
+}
+
+.preview-drive-pin {
+  position: absolute;
+  display: inline-flex;
+  min-height: 30px;
+  align-items: center;
+  border-radius: 999px;
+  padding: 0 9px;
+  background: #fff8ef;
+  color: #171d1a;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 10px;
+  font-style: normal;
+}
+
+.preview-drive-pin.start {
+  left: 22px;
+  bottom: 34px;
+}
+
+.preview-drive-pin.meal {
+  left: 106px;
+  top: 72px;
+  background: #ec784c;
+  color: #ffffff;
+}
+
+.preview-drive-pin.end {
+  right: 24px;
+  top: 34px;
+}
+
+.preview-drive-card {
+  display: grid;
+  gap: 5px;
+  align-self: start;
+  border: 1px solid rgba(255, 248, 239, 0.2);
+  border-radius: 8px;
+  padding: 12px;
+  background: rgba(255, 248, 239, 0.92);
+  color: #171d1a;
+}
+
+.preview-drive-card span,
+.preview-drive-card em,
+.preview-drive-attractions span {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 10px;
+  font-style: normal;
+  line-height: 1.2;
+}
+
+.preview-drive-card strong {
+  font-family: "Raleway", sans-serif;
+  font-size: 15px;
+  line-height: 1.05;
+}
+
+.preview-drive-card em {
+  color: #b85f3f;
+}
+
+.preview-drive-attractions {
+  display: grid;
+  gap: 7px;
+}
+
+.preview-drive-attractions span {
+  border: 1px solid rgba(255, 248, 239, 0.28);
+  border-radius: 999px;
+  padding: 8px 10px;
+  background: rgba(20, 36, 31, 0.72);
+  color: #fff8ef;
 }
 
 .demo-project-copy {
